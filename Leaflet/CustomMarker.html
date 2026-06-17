@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Leaflet Markers in France</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map centered in France
+    var map = L.map('map').setView([48.8566, 2.3522], 6); // Paris coordinates
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Define custom icons (green, red, and orange leaves)
+    var greenIcon = L.icon({
+      iconUrl: 'leaf-green.png',   // Local image for green leaf
+      shadowUrl: 'leaf-shadow.png', // Local shadow image
+      iconSize: [38, 95],           // size of the icon
+      shadowSize: [50, 64],         // size of the shadow
+      iconAnchor: [22, 94],         // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],        // the same for the shadow
+      popupAnchor: [-3, -76]        // point from which the popup should open relative to the iconAnchor
+    });
+
+    var redIcon = L.icon({
+      iconUrl: 'leaf-red.png',      // Local image for red leaf
+      shadowUrl: 'leaf-shadow.png', // Local shadow image
+      iconSize: [38, 95], 
+      shadowSize: [50, 64],  
+      iconAnchor: [22, 94],  
+      shadowAnchor: [4, 62],   
+      popupAnchor: [-3, -76]  
+    });
+
+    var orangeIcon = L.icon({
+      iconUrl: 'leaf-orange.png',   // Local image for orange leaf
+      shadowUrl: 'leaf-shadow.png', // Local shadow image
+      iconSize: [38, 95],  
+      shadowSize: [50, 64],  
+      iconAnchor: [22, 94],  
+      shadowAnchor: [4, 62],   
+      popupAnchor: [-3, -76]  
+    });
+
+    // Add markers with custom icons for different locations in France
+    L.marker([48.8566, 2.3522], {icon: greenIcon}).addTo(map)
+      .bindPopup("I am a green leaf in Paris!");
+    
+    L.marker([43.6047, 1.4442], {icon: redIcon}).addTo(map) // Toulouse coordinates
+      .bindPopup("I am a red leaf in Toulouse!");
+    
+    L.marker([45.7640, 4.8357], {icon: orangeIcon}).addTo(map) // Lyon coordinates
+      .bindPopup("I am an orange leaf in Lyon!");
+  </script>
+
+</body>
+</html>

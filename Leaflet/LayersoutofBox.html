@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Separate Maps</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        .map-container { height: 400px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- Containers for separate maps -->
+<div id="map1" class="map-container"></div>
+<div id="map2" class="map-container"></div>
+<div id="map3" class="map-container"></div>
+<div id="map4" class="map-container"></div>
+<div id="map5" class="map-container"></div>
+<div id="map6" class="map-container"></div>
+
+<script>
+    // Tile Layer (OpenStreetMap)
+    var map1 = L.map('map1').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map1);
+
+    // WMS Tile Layer (example using OpenWeatherMap)
+    var map2 = L.map('map2').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map2);
+    L.tileLayer.wms('https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi', {
+        layers: 'nexrad-n0r-900913',
+        format: 'image/png',
+        transparent: true,
+        attribution: "Weather data &copy; IEM"
+    }).addTo(map2);
+
+    // Markers and Popups
+    var map3 = L.map('map3').setView([51.5, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map3);
+    var marker = L.marker([51.5, -0.09]).addTo(map3);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+    // Vector Layers: Polylines, Polygons, Circles, Rectangles
+    var map4 = L.map('map4').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map4);
+
+    // Polyline
+    var polyline = L.polyline([
+        [51.5, -0.09],
+        [51.6, -0.1],
+        [51.7, -0.11]
+    ]).addTo(map4);
+
+    // Polygon
+    var polygon = L.polygon([
+        [51.5, -0.09],
+        [51.5, -0.1],
+        [51.6, -0.1]
+    ]).addTo(map4);
+
+    // Circle
+    var circle = L.circle([51.508, -0.11], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(map4);
+
+    // Rectangle
+    var bounds = [[51.49, -0.08], [51.5, -0.06]];
+    var rectangle = L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(map4);
+
+    // Image Overlay
+    var map5 = L.map('map5').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map5);
+    var imageUrl = 'https://www.w3schools.com/w3images/fjords.jpg';
+    var imageBounds = [[51.49, -0.08], [51.5, -0.06]];
+    L.imageOverlay(imageUrl, imageBounds).addTo(map5);
+
+    // GeoJSON Layer
+    var map6 = L.map('map6').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map6);
+    var geojsonFeature = {
+        "type": "Feature",
+        "properties": {
+            "name": "Location A",
+            "amenity": "Restaurant",
+            "popupContent": "This is a nice restaurant."
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-0.09, 51.5] // Note: [longitude, latitude] format
+        }
+    };
+    L.geoJSON(geojsonFeature).addTo(map6);
+</script>
+
+</body>
+</html>

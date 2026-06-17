@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Maps - Normal and Heatmap</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Heatmap CSS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+  <style>
+    #mapContainer {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+
+    #normalMap, #heatMap {
+      width: 45%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mapContainer">
+    <!-- Div for the normal map -->
+    <div id="normalMap"></div>
+
+    <!-- Div for the heatmap -->
+    <div id="heatMap"></div>
+  </div>
+
+  <script>
+    // Initialize the normal map
+    var normalMap = L.map('normalMap').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(normalMap);
+
+    // Initialize the heatmap
+    var heatMap = L.map('heatMap').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(heatMap);
+
+    // Create heatmap layer with data points (latitude, longitude, intensity)
+    var heat = L.heatLayer([
+      [51.505, -0.09, 0.2],  // [lat, lng, intensity]
+      [51.51, -0.1, 0.5],
+      [51.51, -0.08, 0.8]
+    ], { radius: 25 }).addTo(heatMap);
+  </script>
+
+</body>
+</html>

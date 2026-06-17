@@ -1,0 +1,76 @@
+    <!-- <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Leaflet Map with Markers</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    </head>
+    <body>
+    <div id="map" style="height: 500px;"></div>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add a marker
+        L.marker([51.5, -0.09]).addTo(map)
+        .bindPopup('A sample marker.')
+        .openPopup();
+    </script>
+    </body>
+    </html> -->
+
+    <!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with Clickable Markers</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+  <div id="map" style="height: 500px;"></div>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Function to add a marker and allow text input
+    function onMapClick(e) {
+      // Create a new marker at the clicked location
+      var marker = L.marker(e.latlng).addTo(map);
+      
+      // Create a popup to allow the user to input text
+      var popupContent = `
+        <label for="markerText">Enter Text:</label>
+        <textarea id="markerText" rows="4" cols="30"></textarea><br>
+        <button onclick="updatePopupText('${e.latlng.lat}', '${e.latlng.lng}')">Save Text</button>
+      `;
+      marker.bindPopup(popupContent).openPopup();
+    }
+
+    // Add an event listener to the map to trigger the onMapClick function
+    map.on('click', onMapClick);
+
+    // Function to update the popup text after the user submits
+    function updatePopupText(lat, lng) {
+      var marker = L.marker([lat, lng]).addTo(map); // Create a new marker at the same location
+      var inputText = document.getElementById('markerText').value; // Get the text from the textarea
+      
+      // Update the popup with the custom text
+      marker.bindPopup(inputText).openPopup();
+    }
+  </script>
+</body>
+</html>
+

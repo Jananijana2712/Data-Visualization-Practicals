@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Maps with Different Styles</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        #map1, #map2, #map3, #map4 {
+            height: 400px; /* Set the height of the maps */
+            margin-bottom: 20px; /* Space between maps */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Leaflet Maps with Different Styles of Map</h1>
+
+<!-- Regular Map -->
+<h2>1. Regular Map</h2>
+<div id="map1"></div>
+
+<!-- Satellite Map -->
+<h2>2. Satellite Map</h2>
+<div id="map2"></div>
+
+<!-- Grayscale Map -->
+<h2>3. Grayscale Map</h2>
+<div id="map3"></div>
+
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+<script>
+    // Map 1 - OpenStreetMap (Regular Style, India)
+    var map1 = L.map('map1').setView([20.5937, 78.9629], 5); // Center on India
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map1);
+    
+    // Map 2 - Satellite Map (Using Esri Satellite, India)
+    var map2 = L.map('map2').setView([20.5937, 78.9629], 5);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; <a href="https://www.esri.com">Esri</a>'
+    }).addTo(map2);
+    
+    // Map 3 - Grayscale Map (CartoDB, World Map)
+    var map3 = L.map('map3').setView([20, 0], 2); // Center on World Map
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://carto.com/attributions">CartoDB</a> contributors'
+    }).addTo(map3);
+    
+    
+</script>
+
+</body>
+</html>

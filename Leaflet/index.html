@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Maps with Various Layers</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+
+<h2>Tile Layer Map</h2>
+<div id="tileMap" style="height: 400px;"></div>
+<script>
+    var tileMap = L.map('tileMap').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(tileMap);
+</script>
+
+<h2>WMS Layer Map</h2>
+<div id="wmsMap" style="height: 400px;"></div>
+<script>
+    var wmsMap = L.map('wmsMap').setView([51.505, -0.09], 13);
+    L.tileLayer.wms('https://ows.terrestris.de/osm/service?', {
+        layers: 'OSM-WMS'
+    }).addTo(wmsMap);
+</script>
+
+<h2>Map with Markers and Popups</h2>
+<div id="markerMap" style="height: 400px;"></div>
+<script>
+    var markerMap = L.map('markerMap').setView([51.5, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(markerMap);
+
+    var marker = L.marker([51.5, -0.09]).addTo(markerMap);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+</script>
+
+<h2>Vector Layers: Polylines, Polygons, Circles, Rectangles</h2>
+<div id="vectorMap" style="height: 400px;"></div>
+<script>
+    var vectorMap = L.map('vectorMap').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(vectorMap);
+
+    var polyline = L.polyline([[51.5, -0.1], [51.5, -0.12], [51.52, -0.12]]).addTo(vectorMap);
+    var polygon = L.polygon([[51.51, -0.08], [51.53, -0.06], [51.52, -0.047]]).addTo(vectorMap);
+    var circle = L.circle([51.508, -0.11], { radius: 500 }).addTo(vectorMap);
+    var rectangle = L.rectangle([[51.49, -0.08], [51.5, -0.06]]).addTo(vectorMap);
+</script>
+
+<h2>Image Overlay Map</h2>
+<div id="imageOverlayMap" style="height: 400px; width: 100%;"></div>
+<script>
+    var imageOverlayMap = L.map('imageOverlayMap').setView([40.742, -74.18], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(imageOverlayMap);
+
+    var imageUrl = 'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+    var imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
+
+    try {
+        L.imageOverlay(imageUrl, imageBounds).addTo(imageOverlayMap);
+        console.log("Image overlay added successfully.");
+    } catch (error) {
+        console.error("Error adding image overlay:", error);
+    }
+</script>
+
+<h2>GeoJSON Layer Map</h2>
+<div id="geoJsonMap" style="height: 400px;"></div>
+<script>
+    var geoJsonMap = L.map('geoJsonMap').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(geoJsonMap);
+
+    var geojsonFeature = {
+        "type": "Feature",
+        "properties": {
+            "name": "A Random Point",
+            "popupContent": "This is a GeoJSON point!"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-0.09, 51.5]
+        }
+    };
+    L.geoJSON(geojsonFeature).bindPopup(function (layer) {
+        return layer.feature.properties.popupContent;
+    }).addTo(geoJsonMap);
+</script>
+
+</body>
+</html>

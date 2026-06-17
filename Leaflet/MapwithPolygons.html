@@ -1,0 +1,103 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with Polygons</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+  <div id="map" style="height: 500px;"></div>
+  <script>
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a polygon
+    var polygon = L.polygon([
+      [51.509, -0.08],
+      [51.503, -0.06],
+      [51.51, -0.047]
+    ]).addTo(map);
+
+    polygon.bindPopup("I am a polygon.");
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Map with Drawing and Custom Popups</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Draw CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.draw/dist/leaflet.draw.css" />
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet Draw JS -->
+  <script src="https://unpkg.com/leaflet.draw/dist/leaflet.draw.js"></script>
+</head>
+<body>
+  <div id="map" style="height: 500px;"></div>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Create a feature group to store the drawn items
+    var drawnItems = new L.FeatureGroup().addTo(map);
+
+    // Add the drawing controls to the map
+    var drawControl = new L.Control.Draw({
+      draw: {
+        polygon: true,   // Allow polygons to be drawn
+        circle: true,    // Allow circles to be drawn
+        marker: true,    // Allow markers to be drawn
+        polyline: false, // Disable polyline
+        rectangle: false // Disable rectangle
+      },
+      edit: {
+        featureGroup: drawnItems, // Enable editing on drawn items
+        remove: true  // Allow the user to delete shapes
+      }
+    });
+    map.addControl(drawControl);
+
+    // Event listener for when a shape is created
+    map.on('draw:created', function(event) {
+      var layer = event.layer;
+      drawnItems.addLayer(layer);
+
+      // Create a popup with a text area for custom text input
+      var popupContent = `
+        <label for="markerText">Enter Text:</label>
+        <textarea id="markerText" rows="4" cols="30"></textarea><br>
+        <button onclick="updatePopupText()">Save Text</button>
+      `;
+      layer.bindPopup(popupContent).openPopup();
+    });
+
+    // Function to update the popup text after the user submits
+    function updatePopupText() {
+      // Get the text from the textarea
+      var inputText = document.getElementById('markerText').value;
+
+      // Get the currently active layer (the one with the popup)
+      var activeLayer = map._popup._source;
+      activeLayer.setPopupContent(inputText); // Update the popup content
+      activeLayer.openPopup(); // Open the updated popup
+    }
+  </script>
+</body>
+</html>

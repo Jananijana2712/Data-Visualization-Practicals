@@ -1,0 +1,10 @@
+fetch('data.geojson')
+  .then(response => response.json())
+  .then(geojsonData => {
+    L.geoJSON(geojsonData, {
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b>" + feature.properties.name + "</b><br>" + 
+                        "Country: " + feature.properties.country);
+      }
+    }).addTo(map);
+  });

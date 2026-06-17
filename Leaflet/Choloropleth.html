@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Choropleth Map</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet GeoJSON -->
+  <script src="https://unpkg.com/leaflet-geojson/dist/leaflet.geojson.js"></script>
+
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([37.8, -96], 4);
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // GeoJSON data for states with different densities and colors
+    var states = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": { "name": "Kansas", "density": 35.6 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-101.5, 40], [-95.5, 40], [-95.5, 37], [-101.5, 37], [-101.5, 40]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "name": "California", "density": 250.0 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-120, 38], [-118, 38], [-118, 36], [-120, 36], [-120, 38]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "name": "Texas", "density": 100.0 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-105, 33], [-95, 33], [-95, 25], [-105, 25], [-105, 33]]] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "name": "Florida", "density": 300.0 },
+          "geometry": { "type": "Polygon", "coordinates": [[[-82, 30], [-81, 30], [-81, 27], [-82, 27], [-82, 30]]] }
+        }
+      ]
+    };
+
+    // Color scale function based on density value
+    function getColor(density) {
+      return density > 200 ? 'red' :
+             density > 150 ? 'orange' :
+             density > 100 ? 'yellow' :
+             density > 50 ? 'green' :
+             'blue';
+    }
+
+    // Styling function for choropleth map
+    function style(feature) {
+      return {
+        fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+      };
+    }
+
+    // Adding GeoJSON data to the map with the styling function
+    L.geoJson(states, {
+      style: style,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<strong>" + feature.properties.name + "</strong><br>Density: " + feature.properties.density);
+      }
+    }).addTo(map);
+  </script>
+</body>
+</html>

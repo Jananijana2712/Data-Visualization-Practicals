@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Overlays Example</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map centered on a location (e.g., Paris)
+    var map = L.map('map').setView([48.8566, 2.3522], 13); // Paris coordinates
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Image Overlay (Example with a transparent image)
+    var imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_France.svg/800px-Flag_of_France.svg.png'; // France Flag as image
+    var imageBounds = [[48.853, 2.349], [48.860, 2.352]]; // Bounding coordinates
+    L.imageOverlay(imageUrl, imageBounds).addTo(map).bindPopup("This is the France flag as an image overlay.");
+
+    // Video Overlay (Example with a video)
+    var videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4'; // Sample video URL
+    var videoBounds = [[48.853, 2.349], [48.860, 2.352]]; // Same bounding coordinates as image
+    var videoOverlay = L.videoOverlay(videoUrl, videoBounds, {
+      opacity: 0.5,
+      autoplay: true,
+      loop: true
+    }).addTo(map).bindPopup("This is a video overlay.");
+
+    // SVG Overlay (Example with an SVG graphic)
+    var svgOverlayContent = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+        <circle cx="100" cy="100" r="80" stroke="green" stroke-width="4" fill="yellow" />
+        <text x="100" y="100" font-size="20" text-anchor="middle" fill="black">SVG Circle</text>
+      </svg>
+    `;
+    var svgBounds = [[48.855, 2.350], [48.860, 2.355]]; // Bounding coordinates
+    L.svgOverlay(svgOverlayContent, svgBounds).addTo(map).bindPopup("This is an SVG overlay.");
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoJSON Example with Leaflet</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Map container -->
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize the map centered on a location (e.g., Paris)
+    var map = L.map('map').setView([48.8566, 2.3522], 13); // Paris coordinates
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // GeoJSON data (example: simple feature with a point and properties)
+    var geojsonData = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [2.3522, 48.8566] // Paris coordinates
+          },
+          "properties": {
+            "name": "Paris",
+            "country": "France"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [2.3522, 48.8566],
+                [2.3822, 48.8566],
+                [2.3822, 48.8766],
+                [2.3522, 48.8766],
+                [2.3522, 48.8566]
+              ]
+            ]
+          },
+          "properties": {
+            "name": "Example Polygon"
+          }
+        }
+      ]
+    };
+
+    // Load and display the GeoJSON data
+    L.geoJSON(geojsonData, {
+      onEachFeature: function (feature, layer) {
+        // Bind popups to the GeoJSON features
+        layer.bindPopup("<b>" + feature.properties.name + "</b><br>" + 
+                        "Country: " + feature.properties.country);
+      }
+    }).addTo(map);
+  </script>
+
+</body>
+</html>
