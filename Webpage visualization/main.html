@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CSV Chart Visualizer</title>
+</head>
+<body>
+    <h1>Upload CSV to Visualize Charts</h1>
+
+    <!-- File Upload Form -->
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload and Visualize</button>
+    </form>
+
+    <!-- Dataset Preview -->
+    <div th:if="${previewData != null}">
+        <h2>Dataset Preview</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th th:each="header : ${previewData[0].keySet()}" th:text="${header}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${previewData}">
+                <td th:each="value : ${row.values()}" th:text="${value}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Chart Containers -->
+        <h2>Charts</h2>
+        <canvas id="barChart" width="400" height="200"></canvas>
+        <canvas id="lineChart" width="400" height="200"></canvas>
+        <canvas id="scatterChart" width="400" height="200"></canvas>
+        <canvas id="boxPlotChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript for Rendering Charts -->
+    <script>
+        function renderChart(ctxId, type, labels, data, label) {
+            const ctx = document.getElementById(ctxId).getContext('2d');
+            new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                }
+            });
+        }
+
+        // Example AJAX calls for chart data
+        fetch('/api/chart/bar').then(response => response.json()).then(data => {
+            renderChart('barChart', 'bar', data.labels, data.values, 'Bar Chart');
+        });
+
+        fetch('/api/chart/line').then(response => response.json()).then(data => {
+            renderChart('lineChart', 'line', data.labels, data.values, 'Line Chart');
+        });
+
+        fetch('/api/chart/scatter').then(response => response.json()).then(data => {
+            renderChart('scatterChart', 'scatter', data.labels, data.values, 'Scatter Plot');
+        });
+
+        fetch('/api/chart/boxplot').then(response => response.json()).then(data => {
+            renderChart('boxPlotChart', 'boxPlot', data.labels, data.values, 'Box Plot');
+        });
+    </script>
+</body>
+</html>
