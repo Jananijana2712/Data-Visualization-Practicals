@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Day', 'USA', 'India'],
+                [1,  100000, 80000],
+                [2,  120000, 90000],
+                [3,  140000, 110000],
+                [4,  160000, 130000],
+                [5,  180000, 150000],
+                [6,  200000, 160000],
+                [7,  220000, 180000],
+                [8,  250000, 200000],
+                [9,  270000, 220000],
+                [10, 290000, 240000],
+                [11, 310000, 260000],
+                [12, 330000, 280000],
+                [13, 350000, 300000],
+                [14, 370000, 320000]
+            ]);
+
+            var options = {
+                title: 'Top COVID-19 Daily New Cases',
+                hAxis: {
+                    title: 'Days'
+                },
+                vAxis: {
+                    title: 'Number of Cases',
+                    viewWindow: {
+                        min: 0
+                    }
+                },
+                series: {
+                    0: {color: '#F875AA'}, // USA color
+                    1: {color: '#D0A2F7'}  // India color
+                },
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('top_y_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="top_y_chart" style="width: 900px; height: 500px"></div>
+</body>
+</html>

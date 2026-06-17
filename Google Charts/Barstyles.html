@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Bar Styles in Google Charts</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        // Sample data with style role
+        var data = google.visualization.arrayToDataTable([
+          ['Month', { role: 'style' }, 'Confirmed Cases'],
+          ['March', 'color: #FF5733; opacity: 0.8; stroke-width: 2; stroke-color: #000;', 1000],
+          ['April', 'color: #33FF57; opacity: 0.8; stroke-width: 2; stroke-color: #000;', 20000],
+          ['May', 'color: #3357FF; opacity: 0.8; stroke-width: 2; stroke-color: #000;', 30000],
+          ['June', 'color: #FFD700; opacity: 0.8; stroke-width: 2; stroke-color: #000;', 50000],
+          ['July', 'color: #FF4500; opacity: 0.8; stroke-width: 8; stroke-color: #000;', 70000]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Confirmed Cases',
+          hAxis: {title: 'Month'},
+          vAxis: {title: 'Number of Cases'},
+          legend: { position: 'none' } // Hide legend if needed
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('custom_bar_styles_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="custom_bar_styles_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

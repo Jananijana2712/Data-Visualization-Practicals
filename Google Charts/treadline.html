@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Example COVID-19 data: [Days, Cases, Deaths]
+            var data = google.visualization.arrayToDataTable([
+                ['Days', 'Cases', 'Deaths'],
+                [0, 5, 0],
+                [1, 20, 1],
+                [2, 50, 2],
+                [3, 80, 4],
+                [4, 120, 5],
+                [5, 200, 8],
+                [6, 300, 12],
+                [7, 500, 200],
+                [8, 800, 400],
+                [9, 1200, 600],
+                [10, 1800, 900]
+            ]);
+
+            var options = {
+                height: 500,
+                legend: { position: 'top' },
+                colors: ['#9575cd', '#33ac71'],
+                pointShape: 'diamond',
+                trendlines: {
+                    0: {
+                        type: 'exponential',
+                        pointSize: 10,
+                        opacity: 0.6,
+                        pointsVisible: false // Hides points for the exponential trendline
+                    },
+                    1: {
+                        type: 'linear',
+                        pointSize: 10,
+                        pointsVisible: true // Shows points for the linear trendline
+                    }
+                }
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

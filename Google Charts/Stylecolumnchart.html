@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Column Chart with Styles</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Cases', { role: 'style' }],
+          ['March', 1000, 'color: #FF97C1'],
+          ['April', 20000, 'color: #33FF57; opacity: 0.8'],
+          ['May', 30000, 'color: #3357FF; opacity: 0.6; stroke-width: 2'],
+          ['June', 50000, 'color: #E14D2A; stroke-width: 4'],
+          ['July', 70000, 'color: #CA2374; opacity: 0.4; stroke-color: black; stroke-width: 2']
+        ]);
+
+        var options = {
+          title: 'COVID-19 Cases with Custom Styles',
+          hAxis: { title: 'Month' },
+          vAxis: { title: 'Number of Cases' },
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('styled_column_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="styled_column_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

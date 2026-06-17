@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawBoxPlot);
+
+      function drawBoxPlot() {
+        // Sample COVID-19 data: daily new cases for different countries
+        var array = [
+          ['USA', 10000, 12000, 15000, 8000, 9500, 11000, 14000],
+          ['India', 7000, 9000, 11000, 5000, 6000, 8000, 10000],
+          ['Brazil', 5000, 6000, 8000, 4000, 4500, 6500, 7500],
+          ['UK', 3000, 4000, 5000, 2000, 2500, 3500, 4500],
+          ['Russia', 2000, 3000, 4000, 1500, 1600, 2000, 2500],
+          ['Germany', 2500, 3500, 4500, 1800, 2100, 2900, 3200],
+          ['France', 4000, 5000, 6000, 3500, 3800, 4200, 4600]
+        ];
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Country');
+        data.addColumn('number', 'series0');
+        data.addColumn('number', 'series1');
+        data.addColumn('number', 'series2');
+        data.addColumn('number', 'series3');
+        data.addColumn('number', 'series4');
+        data.addColumn('number', 'series5');
+        data.addColumn('number', 'series6');
+
+        data.addColumn({id:'max', type:'number', role:'interval'});
+        data.addColumn({id:'min', type:'number', role:'interval'});
+        data.addColumn({id:'firstQuartile', type:'number', role:'interval'});
+        data.addColumn({id:'median', type:'number', role:'interval'});
+        data.addColumn({id:'thirdQuartile', type:'number', role:'interval'});
+
+        data.addRows(getBoxPlotValues(array));
+
+        function getBoxPlotValues(array) {
+          for (var i = 0; i < array.length; i++) {
+            var arr = array[i].slice(1).sort(function (a, b) {
+              return a - b;
+            });
+
+            var max = arr[arr.length - 1];
+            var min = arr[0];
+            var median = getMedian(arr);
+            var firstQuartile = getMedian(arr.slice(0, Math.floor(arr.length / 2)));
+            var thirdQuartile = getMedian(arr.slice(Math.ceil(arr.length / 2)));
+
+            array[i][8] = max;
+            array[i][9] = min;
+            array[i][10] = firstQuartile;
+            array[i][11] = median;
+            array[i][12] = thirdQuartile;
+          }
+          return array;
+        }
+
+        function getMedian(array) {
+          var length = array.length;
+          if (length % 2 === 0) {
+            var midUpper = length / 2;
+            var midLower = midUpper - 1;
+            return (array[midUpper] + array[midLower]) / 2;
+          } else {
+            return array[Math.floor(length / 2)];
+          }
+        }
+
+        var options = {
+          title: 'COVID-19 Daily New Cases Box Plot',
+          height: 500,
+          legend: {position: 'none'},
+          hAxis: {
+            gridlines: {color: '#fff'}
+          },
+          lineWidth: 0,
+          series: [{'color': '#D3362D'}],
+          intervals: {
+            barWidth: 1,
+            boxWidth: 1,
+            lineWidth: 2,
+            style: 'boxes'
+          },
+          interval: {
+            max: {
+              style: 'bars',
+              fillOpacity: 1,
+              color: '#777'
+            },
+            min: {
+              style: 'bars',
+              fillOpacity: 1,
+              color: '#777'
+            }
+          }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('box_plot'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="box_plot" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

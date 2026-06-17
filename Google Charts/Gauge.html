@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', { 'packages': ['gauge'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Vaccination Rate', 75],   // Example: Vaccination rate in percentage
+          ['Hospitalization Rate', 30], // Example: Hospitalization rate in percentage
+          ['Recovery Rate', 90]        // Example: Recovery rate in percentage
+        ]);
+
+        var options = {
+          width: 600,   // Increased width
+          height: 400,  // Increased height
+          redFrom: 70, redTo: 100,   // Critical zone for Vaccination Rate
+          yellowFrom: 50, yellowTo: 70, // Warning zone for Vaccination Rate
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        // Simulated data updates
+        setInterval(function() {
+          data.setValue(0, 1, 70 + Math.round(30 * Math.random())); // Vaccination Rate
+          chart.draw(data, options);
+        }, 13000);
+        
+        setInterval(function() {
+          data.setValue(1, 1, 20 + Math.round(40 * Math.random())); // Hospitalization Rate
+          chart.draw(data, options);
+        }, 5000);
+        
+        setInterval(function() {
+          data.setValue(2, 1, 80 + Math.round(20 * Math.random())); // Recovery Rate
+          chart.draw(data, options);
+        }, 26000);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 600px; height: 400px;"></div> <!-- Increased size -->
+  </body>
+</html>

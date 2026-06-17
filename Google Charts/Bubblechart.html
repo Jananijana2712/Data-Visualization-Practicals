@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COVID-19 Bubble Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed Cases', 'Recovered Cases', 'Bubble Size (Severity)', 'Month Index'],
+          ['March',  1000, 800, 500, 1],
+          ['April',  20000, 15000, 1500, 2],
+          ['May',    30000, 25000, 2000, 3],
+          ['June',   50000, 40000, 2500, 4],
+          ['July',   70000, 60000, 3000, 5]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Confirmed vs. Recovered Cases (Bubble Size Represents Severity)',
+          hAxis: {title: 'Confirmed Cases'},
+          vAxis: {title: 'Recovered Cases'},
+          bubble: {textStyle: {fontSize: 12}},
+          colors: ['#A0153E'],  // Custom bubble color
+        };
+
+        var chart = new google.visualization.BubbleChart(document.getElementById('bubble_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="bubble_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

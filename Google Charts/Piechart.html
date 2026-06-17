@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Pie Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed Cases'],
+          ['March', 1500],
+          ['April', 25000],
+          ['May', 45000],
+          ['June', 70000],
+          ['July', 90000]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Confirmed Cases Distribution',
+          colors: ['#FFD700', '#AD88C6', '#E1AFD1', '#FFE6E6', '#7469B6']
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('basic_pie_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="basic_pie_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

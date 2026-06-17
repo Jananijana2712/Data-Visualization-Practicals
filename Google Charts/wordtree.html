@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:['wordtree']});
+      google.charts.setOnLoadCallback(drawSimpleNodeChart);
+      function drawSimpleNodeChart() {
+        var nodeListData = new google.visualization.arrayToDataTable([
+          ['id', 'childLabel', 'parent', 'size', 'weight'],
+          [0, 'Harry Potter Universe', -1, 1, 0],
+          [1, 'Characters', 0, 5, 0],
+          [2, 'Spells', 0, 5, 0],
+          [3, 'Magical Creatures', 0, 5, 0],
+          [4, 'Houses', 0, 5, 0],
+
+          [5, 'Harry Potter', 1, 5, 0],
+          [6, 'Hermione Granger', 1, 5, 0],
+          [7, 'Ron Weasley', 1, 5, 0],
+          [8, 'Albus Dumbledore', 1, 5, 0],
+          [9, 'Voldemort', 1, 5, 0],
+
+          [10, 'Expelliarmus', 2, 5, 0],
+          [11, 'Expecto Patronum', 2, 5, 0],
+          [12, 'Lumos', 2, 5, 0],
+          [13, 'Avada Kedavra', 2, 5, 0],
+          [14, 'Wingardium Leviosa', 2, 5, 0],
+
+          [15, 'Hippogriff', 3, 5, 0],
+          [16, 'Thestral', 3, 5, 0],
+          [17, 'Phoenix', 3, 5, 0],
+          [18, 'Basilisk', 3, 5, 0],
+          [19, 'Acromantula', 3, 5, 0],
+
+          [20, 'Gryffindor', 4, 5, 0],
+          [21, 'Hufflepuff', 4, 5, 0],
+          [22, 'Ravenclaw', 4, 5, 0],
+          [23, 'Slytherin', 4, 5, 0]
+        ]);
+
+        var options = {
+          maxFontSize: 14,
+          wordtree: {
+            format: 'explicit',
+            type: 'suffix'
+          },
+          colors: ['purple']
+        };
+
+        var wordtree = new google.visualization.WordTree(
+          document.getElementById('wordtree_explicit_maxfontsize'));
+        wordtree.draw(nodeListData, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="wordtree_explicit_maxfontsize" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

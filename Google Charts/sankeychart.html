@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <div id="sankey_multiple" style="width: 1000px; height: 400px;"></div>
+
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["sankey"]});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'From');
+            data.addColumn('string', 'To');
+            data.addColumn('number', 'Weight');
+            data.addRows([
+                ['USA', 'Recovered', 8000000],
+                ['USA', 'Hospitalized', 300000],
+                ['USA', 'Deceased', 500000],
+                ['Brazil', 'Recovered', 7000000],
+                ['Brazil', 'Hospitalized', 250000],
+                ['Brazil', 'Deceased', 400000],
+                ['India', 'Recovered', 10000000],
+                ['India', 'Hospitalized', 200000],
+                ['India', 'Deceased', 300000],
+                ['UK', 'Recovered', 3000000],
+                ['UK', 'Hospitalized', 100000],
+                ['UK', 'Deceased', 130000],
+                ['France', 'Recovered', 2500000],
+                ['France', 'Hospitalized', 90000],
+                ['France', 'Deceased', 120000],
+                ['South Africa', 'Recovered', 2000000],
+                ['South Africa', 'Hospitalized', 50000],
+                ['South Africa', 'Deceased', 90000],
+                ['Recovered', 'Discharged', 24000000],
+                ['Hospitalized', 'Intensive Care', 300000],
+                ['Deceased', 'Posthumous Reporting', 500000]
+            ]);
+
+            var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
+                          '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
+
+            // Set chart options with link border
+            var options = {
+                height: 400,
+                sankey: {
+                    node: {
+                        colors: colors
+                    },
+                    link: {
+                        colorMode: 'gradient',
+                        colors: colors,
+                        color: {
+                            stroke: '#000000',  // Border color for links
+                            strokeWidth: 2      // Border width for links
+                        }
+                    }
+                }
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

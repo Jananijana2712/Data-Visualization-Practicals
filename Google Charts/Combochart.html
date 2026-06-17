@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Combo Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed Cases', 'Deaths'],
+          ['March', 150, 40],
+          ['April', 250, 200],
+          ['May', 450, 300],
+          ['June', 700, 400],
+          ['July', 900, 600]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Confirmed Cases and Deaths',
+          hAxis: { title: 'Month' },
+          vAxes: {
+            0: { title: 'Confirmed Cases' },
+            1: { title: 'Deaths' }
+          },
+          seriesType: 'bars', // Use bars for confirmed cases
+          series: {
+            1: { type: 'line' } // Use line for deaths
+          },
+          colors: ['#AD88C6', '#FACBEA'] // Custom colors for each series
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('combo_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="combo_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COVID-19 Waterfall Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Cases Added', 'Cumulative Cases'],
+          ['March',  1000,  1000],
+          ['April',  20000, 21000],
+          ['May',    30000, 51000],
+          ['June',   50000, 101000],
+          ['July',   70000, 171000]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Cases Waterfall Chart',
+          seriesType: 'bars', // Using bars for cases added per month
+          series: {
+            1: { type: 'line', lineDashStyle: [4, 4] } // Cumulative cases with a dashed line
+          },
+          vAxis: {title: 'Number of Cases'},
+          hAxis: {title: 'Month'},
+          colors: ['#E0144C', '#712B75'],
+          bar: { groupWidth: '60%' }
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('waterfall_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="waterfall_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

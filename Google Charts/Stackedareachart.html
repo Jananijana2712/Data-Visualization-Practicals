@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COVID-19 Stacked Area Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the Stacked Area Chart, passes in the data and draws it.
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Confirmed Cases', 'Recovered Cases', 'Deaths'],
+          ['March 2020',  1000,  100,   10],
+          ['April 2020',  20000, 5000,  500],
+          ['May 2020',    30000, 15000, 1000],
+          ['June 2020',   50000, 25000, 2000],
+          ['July 2020',   70000, 40000, 3000],
+          ['August 2020', 80000, 60000, 4000],
+          ['September 2020', 100000, 75000, 5000],
+          ['October 2020', 120000, 90000, 6000],
+          ['November 2020', 150000, 110000, 7000],
+          ['December 2020', 180000, 140000, 8000],
+        ]);
+
+        // Set chart options
+        var options = {
+          title: 'COVID-19 Cases, Recoveries, and Deaths Over Time',
+          hAxis: {title: 'Date'},
+          vAxis: {title: 'Number of Cases'},
+          isStacked: true,  // Enable stacked area chart
+          areaOpacity: 0.7, // Opacity for the filled areas
+          colors: ['#7E60BF', '#E4B1F0', '#FF6347'], // Colors for each series
+          legend: { position: 'bottom' },
+          backgroundColor: '#f5f5f5'
+        };
+
+        // Instantiate and draw the chart, passing in the options.
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- Div that will hold the Stacked Area Chart -->
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

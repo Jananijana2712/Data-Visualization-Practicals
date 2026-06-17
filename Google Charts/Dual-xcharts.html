@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dual-X Bar Chart for COVID-19</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed Cases', 'Recovered Cases'],
+          ['March', 1000, 800],
+          ['April', 20000, 15000],
+          ['May', 30000, 25000],
+          ['June', 50000, 40000],
+          ['July', 70000, 60000]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Dual-X Bar Chart',
+          hAxis: {
+            title: 'Number of Cases',
+            minValue: 0,
+          },
+          vAxis: {
+            title: 'Month'
+          },
+          series: {
+            0: {color: '#C70039'}, // Color for Confirmed Cases
+            1: {color: '#F94C10'}  // Color for Recovered Cases
+          },
+          isStacked: false // Use false for side-by-side bars
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('dual_x_bar_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="dual_x_bar_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

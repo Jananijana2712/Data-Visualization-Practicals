@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Combined Interval Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Category'); // Category (e.g., different countries or time periods)
+            data.addColumn('number', 'Min'); // Minimum value for Box plot
+            data.addColumn('number', 'Q1'); // First Quartile for Box plot
+            data.addColumn('number', 'Median'); // Median value for Box plot
+            data.addColumn('number', 'Q3'); // Third Quartile for Box plot
+            data.addColumn('number', 'Max'); // Maximum value for Box plot
+            data.addColumn('number', 'Point'); // Point for additional markers
+            data.addColumn('number', 'Bar'); // Bar values
+
+            // Sample data: Combined intervals for COVID-19 confirmed cases, deaths, and recoveries
+            data.addRows([
+                [1, 1000, 3000, 4000, 6000, 10000, 5000, 7000], // Confirmed Cases
+                [2, 10, 20, 50, 80, 100, 60, 90],              // Deaths
+                [3, 500, 1500, 2000, 2500, 4000, 3500, 3700], // Recoveries
+                [4, 200, 400, 800, 1200, 1600, 1000, 1400],   // Active Cases
+                [5, 300, 500, 700, 900, 1200, 900, 1000]       // Severe Cases
+            ]);
+
+            var options = {
+                title: 'COVID-19 Combined Interval Chart (Box, Point, Bar, Line)',
+                legend: { position: 'top' },
+                hAxis: {
+                    title: 'Category',
+                    ticks: [1, 2, 3, 4, 5] // Custom ticks for categories
+                },
+                vAxis: {
+                    title: 'Count'
+                },
+                series: {
+                    0: { type: 'box', color: '#B5C0D0' }, // Box plot for Min, Q1, Median, Q3, Max
+                    1: { type: 'scatter', pointShape: 'circle', pointSize: 5, color: '#FF7EE2' }, // Points for additional data
+                    2: { type: 'bars', color: '#E1F0DA' }, // Bar values
+                    3: { type: 'line', color: '#03AED2', lineWidth: 3 } // Line for trend or another metric
+                },
+                intervals: { style: 'area' }, // Area style for intervals
+                width: 800,
+                height: 500
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+
+            // Redraw the chart on window resize
+            window.addEventListener('resize', function() {
+                chart.draw(data, options);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>COVID-19 Combined Interval Chart</h2>
+    <div id="chart_div" style="width: 800px; height: 500px;"></div>
+</body>
+</html>

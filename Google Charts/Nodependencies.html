@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('string', 'Resource');
+      data.addColumn('date', 'Start Date');
+      data.addColumn('date', 'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+
+      data.addRows([
+        ['1', 'Initial Lockdown', 'lockdown',
+         new Date(2020, 2, 1), new Date(2020, 4, 30), null, 100, null],
+        ['2', 'Vaccination Phase 1', 'vaccination',
+         new Date(2021, 0, 1), new Date(2021, 3, 31), null, 75, null],
+        ['3', 'Vaccination Phase 2', 'vaccination',
+         new Date(2021, 4, 1), new Date(2021, 8, 30), null, 50, null],
+        ['4', 'Public Health Campaign', 'campaign',
+         new Date(2021, 1, 1), new Date(2021, 7, 31), null, 80, null],
+        ['5', 'Easing Lockdown Measures', 'lockdown',
+         new Date(2020, 5, 1), new Date(2020, 6, 15), null, 100, null],
+        ['6', 'Monitoring and Recovery', 'recovery',
+         new Date(2021, 3, 1), new Date(2022, 0, 1), null, 40, null]
+      ]);
+
+      var options = {
+        height: 400,
+        gantt: {
+          trackHeight: 30
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="chart_div" style="width: 900px; height: 400px;"></div>
+</body>
+</html>

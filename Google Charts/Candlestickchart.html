@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COVID-19 Candlestick Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          // First column should be a Date object, and the next four are numeric values
+          [new Date(2020, 2, 1), 800, 1000, 1200, 1400],  // March 1, 2020
+          [new Date(2020, 2, 2), 1200, 1300, 1400, 1500], // March 2, 2020
+          [new Date(2020, 2, 3), 1400, 1500, 1600, 1700], // March 3, 2020
+          [new Date(2020, 2, 4), 1000, 1100, 1300, 1500], // March 4, 2020
+          [new Date(2020, 2, 5), 900, 1000, 1200, 1400]   // March 5, 2020
+        ], true);
+
+        var options = {
+          title: 'COVID-19 Confirmed Cases Range',
+          legend: 'none',
+          candlestick: {
+            fallingColor: { strokeWidth: 0, fill: '#712B75' }, // Red for decrease
+            risingColor: { strokeWidth: 0, fill: '#CD104D' }   // Green for increase
+          }
+        };
+
+        var chart = new google.visualization.CandlestickChart(document.getElementById('candlestick_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="candlestick_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

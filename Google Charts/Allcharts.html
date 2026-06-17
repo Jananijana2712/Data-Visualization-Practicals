@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Chart Tool</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawAllCharts);
+
+        function drawAllCharts() {
+            drawLineChart();
+            drawBarChart();
+            drawBoxPlot();
+        }
+
+        function drawLineChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'Cases'],
+                ['January', 1000],
+                ['February', 1170],
+                ['March', 660],
+                ['April', 1030]
+            ]);
+
+            var options = {
+                title: 'COVID-19 Monthly Cases Line Chart',
+                hAxis: { title: 'Month' },
+                vAxis: { title: 'Cases' },
+                width: 400,
+                height: 300,
+                series: { 0: { color: '#4285F4' } }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
+            chart.draw(data, options);
+        }
+
+        function drawBarChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'Cases'],
+                ['January', 1000],
+                ['February', 1170],
+                ['March', 660],
+                ['April', 1030]
+            ]);
+
+            var options = {
+                title: 'COVID-19 Monthly Cases Bar Chart',
+                hAxis: { title: 'Month' },
+                vAxis: { title: 'Cases' },
+                width: 400,
+                height: 300,
+                series: { 0: { color: '#DB4437' } }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+            chart.draw(data, options);
+        }
+
+        function drawBoxPlot() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Month');
+            data.addColumn('number', 'Minimum');
+            data.addColumn('number', 'Q1');
+            data.addColumn('number', 'Median');
+            data.addColumn('number', 'Q3');
+            data.addColumn('number', 'Maximum');
+
+            // Sample COVID-19 data for a box plot
+            data.addRows([
+                ['January', 800, 900, 1000, 1100, 1200],
+                ['February', 1000, 1100, 1200, 1300, 1400],
+                ['March', 900, 1000, 1050, 1150, 1250],
+                ['April', 1100, 1200, 1250, 1350, 1450]
+            ]);
+
+            var options = {
+                title: 'COVID-19 Monthly Cases Box Plot',
+                intervals: { style: 'boxes' },
+                legend: 'none',
+                hAxis: { title: 'Month' },
+                vAxis: { title: 'Cases' },
+                width: 400,
+                height: 300,
+                series: [{ color: '#0F9D58' }]
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('box_plot_div'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h1>Google Chart Tool</h1>
+    <div id="line_chart_div" style="width: 400px; height: 300px; float: left; margin-right: 20px;"></div>
+    <div id="bar_chart_div" style="width: 400px; height: 300px; float: left; margin-right: 20px;"></div>
+    <div id="box_plot_div" style="width: 400px; height: 300px; float: left;"></div>
+    <div style="clear: both;"></div>
+</body>
+</html>

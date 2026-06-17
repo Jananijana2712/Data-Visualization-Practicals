@@ -1,0 +1,62 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Days Since Outbreak');
+      data.addColumn('number', 'Cases');
+
+      // Placeholder COVID-19 data for animation (e.g., cases by day)
+      var days = 60;
+      for (var i = 0; i < days; i++) {
+        data.addRow([i, Math.floor(5000 + 500 * Math.sin(i / 5) + Math.random() * 300)]);
+      }
+
+      // The central point, representing a peak case value that will fluctuate.
+      data.addRow([0, 0]);
+
+      var options = {
+        title: 'COVID-19 Case Spread over Time',
+        hAxis: { title: 'Days Since Outbreak', minValue: 0, maxValue: days },
+        vAxis: { title: 'Number of Cases', minValue: 0, maxValue: 10000 },
+        legend: 'none',
+        colors: ['#9B86BD'],  // Set to your desired color
+        pointShape: 'circle',
+        pointSize: 5,
+        animation: {
+          duration: 200,
+          easing: 'inAndOut',
+        }
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('animatedshapes_div'));
+
+      // Start the animation by listening to the first 'ready' event.
+      google.visualization.events.addOneTimeListener(chart, 'ready', randomWalk);
+
+      // Control all other animations by listening to the 'animationfinish' event.
+      google.visualization.events.addListener(chart, 'animationfinish', randomWalk);
+
+      chart.draw(data, options);
+
+      function randomWalk() {
+        var x = data.getValue(data.getNumberOfRows() - 1, 0);
+        var y = data.getValue(data.getNumberOfRows() - 1, 1);
+        x += 1 * (Math.random() - 0.5);
+        y += 50 * (Math.random() - 0.5);
+        if (y < 0) y = Math.random() * 1000;  // Bounce up if below zero cases
+        data.setValue(data.getNumberOfRows() - 1, 0, x);
+        data.setValue(data.getNumberOfRows() - 1, 1, y);
+        chart.draw(data, options);
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="animatedshapes_div" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

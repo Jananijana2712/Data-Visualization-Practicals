@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load("current", { packages: ["gantt"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function toMilliseconds(days) {
+        return days * 24 * 60 * 60 * 1000; // Calculate days to milliseconds
+      }
+
+      function drawChart() {
+        var otherData = new google.visualization.DataTable();
+        otherData.addColumn("string", "Task ID");
+        otherData.addColumn("string", "Task Name");
+        otherData.addColumn("string", "Resource");
+        otherData.addColumn("date", "Start");
+        otherData.addColumn("date", "End");
+        otherData.addColumn("number", "Duration");
+        otherData.addColumn("number", "Percent Complete");
+        otherData.addColumn("string", "Dependencies");
+
+        otherData.addRows([
+          // Critical Path Tasks
+          [
+            "initialLockdown",
+            "Initial Lockdown",
+            "policy",
+            new Date(2020, 2, 15), // March 15, 2020
+            new Date(2020, 5, 1),   // June 1, 2020
+            null,
+            100,
+            null,
+          ],
+          [
+            "vaccineRollout",
+            "Vaccine Rollout",
+            "health",
+            new Date(2020, 11, 14), // December 14, 2020
+            new Date(2021, 11, 31), // December 31, 2021
+            toMilliseconds(365),     // Duration of 1 year
+            70,
+            "initialLockdown",
+          ],
+          [
+            "caseSpike",
+            "Case Spike Due to Variants",
+            "health",
+            new Date(2021, 5, 1),   // June 1, 2021
+            new Date(2021, 8, 30),   // September 30, 2021
+            toMilliseconds(120),     // Duration of 120 days
+            50,
+            "vaccineRollout",
+          ],
+          // Non-Critical Path Tasks
+          [
+            "maskMandate",
+            "Mandatory Mask Wearing",
+            "policy",
+            new Date(2020, 3, 1),   // April 1, 2020
+            new Date(2021, 5, 1),   // June 1, 2021
+            toMilliseconds(426),     // Duration of 426 days
+            100,
+            "initialLockdown",
+          ],
+          [
+            "endLockdown",
+            "Phased End of Lockdown",
+            "policy",
+            new Date(2020, 5, 1),   // June 1, 2020
+            new Date(2020, 11, 1),  // December 1, 2020
+            toMilliseconds(180),     // Duration of 180 days
+            100,
+            "initialLockdown",
+          ],
+        ]);
+
+        var options = {
+          height: 400,
+          gantt: {
+            criticalPathEnabled: false,
+            innerGridHorizLine: {
+              stroke: '#ffe0b2',   // Color of horizontal grid lines
+              strokeWidth: 2       // Width of horizontal grid lines
+            },
+            innerGridTrack: { fill: '#E7CCCC' },       // Color of light tracks
+            innerGridDarkTrack: { fill: '#EDDFE0' },   // Color of dark tracks
+            arrow: {
+              angle: 100,      // Arrow angle
+              width: 5,        // Arrow width
+              color: 'purple',  // Arrow color
+              radius: 0        // Arrow radius
+            },
+          },
+        };
+
+        var chart = new google.visualization.Gantt(
+          document.getElementById("chart_div")
+        );
+
+        chart.draw(otherData, options);
+      }
+    </script>
+    <style>
+      /* Styling for the Gantt chart container */
+      #chart_div {
+        width: 100%;
+        height: 500px;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Additional styling for better visualization */
+      .google-visualization-gantt {
+        border: 1px solid #ddd; /* Border around the Gantt chart */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+  </body>
+</html>

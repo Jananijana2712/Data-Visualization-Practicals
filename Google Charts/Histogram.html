@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        // Example COVID-19 data (normalized values)
+        var data = google.visualization.arrayToDataTable([
+          ['Normalized Data', 'Cases', 'Deaths', 'Recoveries'],
+          [0.1, 0.2, 0.15, 0.18],
+          [0.15, 0.25, 0.18, 0.22],
+          [0.13, 0.3, 0.12, 0.2],
+          [-0.1, -0.2, -0.15, -0.18],
+          [-0.15, -0.25, -0.18, -0.2],
+          [0.05, 0.12, 0.1, 0.11],
+          [0.02, 0.05, 0.03, 0.04],
+          [-0.02, -0.04, -0.05, -0.03],
+          [0.35, 0.3, 0.25, 0.27],
+          [-0.3, -0.35, -0.3, -0.33]
+          // Add more rows as needed
+        ]);
+
+        var options = {
+          title: 'COVID-19 Data: Approximating Normal Distribution by Cases, Deaths, and Recoveries',
+          legend: { position: 'top', alignment: 'center' },
+          colors: ['#D20062', '#711DB0', '#34A853'], // Colors for cases, deaths, and recoveries
+          chartArea: { width: 450 },
+          hAxis: {
+            ticks: [-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1]
+          },
+          bar: { gap: 0 },
+          histogram: {
+            bucketSize: 0.05,
+            maxNumBuckets: 400,
+            minValue: -1,
+            maxValue: 1
+          }
+        };
+
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 700px; height: 500px;"></div>
+  </body>
+</html>

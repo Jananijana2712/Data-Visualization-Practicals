@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Bar Chart with Labels</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed Cases'],
+          ['March', 1000],
+          ['April', 20000],
+          ['May', 30000],
+          ['June', 50000],
+          ['July', 70000]
+        ]);
+
+        var options = {
+          title: 'COVID-19 Confirmed Cases',
+          hAxis: {title: 'Month'},
+          vAxis: {title: 'Number of Cases'},
+          legend: { position: 'none' },
+          annotations: {
+            textStyle: {
+              fontSize: 12, // Font size of the labels
+              color: '#950101', // Font color of the labels
+              auraColor: '#CF56A1' // Aura color around the labels
+            }
+          }
+        };
+
+        // Create and draw the chart
+        var chart = new google.visualization.ColumnChart(document.getElementById('bar_chart_with_labels'));
+        chart.draw(data, options);
+        
+        // Adding data labels to the bars
+        addLabels(chart, data);
+      }
+
+      function addLabels(chart, data) {
+        const formatter = new google.visualization.NumberFormat({fractionDigits: 0});
+        formatter.format(data, 1); // Apply formatter to the second column (Confirmed Cases)
+
+        const labels = data.getDistinctValues(0); // Get distinct labels from the first column (Months)
+        const chartArea = chart.getChartLayoutInterface();
+        
+        for (let i = 0; i < labels.length; i++) {
+          const barHeight = chartArea.getYLocation(data.getValue(i, 1)); // Get the Y location of the bar
+          const xPosition = chartArea.getXLocation(i); // Get the X location of the bar
+
+          // Create a label element
+          const label = document.createElement('div');
+          label.innerHTML = data.getValue(i, 1); // Set the value as the label
+          label.style.position = 'absolute';
+          label.style.left = (xPosition - 20) + 'px'; // Adjust left position
+          label.style.top = (barHeight - 20) + 'px'; // Adjust top position
+          label.style.color = '#950101'; // Set label color
+          label.style.fontSize = '12px'; // Set label font size
+
+          // Append the label to the chart container
+          document.getElementById('bar_chart_with_labels').appendChild(label);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="bar_chart_with_labels" style="width: 900px; height: 500px; position: relative;"></div>
+  </body>
+</html>

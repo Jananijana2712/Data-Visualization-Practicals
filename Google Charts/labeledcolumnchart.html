@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Labeled Column Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Cases', { role: 'annotation' }],
+          ['March', 1000, '1k'],
+          ['April', 20000, '20k'],
+          ['May', 30000, '30k'],
+          ['June', 50000, '50k'],
+          ['July', 70000, '70k']
+        ]);
+
+        var options = {
+          title: 'COVID-19 Cases with Annotations',
+          hAxis: { title: 'Month' },
+          vAxis: { title: 'Number of Cases' },
+          legend: 'none',
+          colors: ['#BE5A83']  // Custom color for the bars
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('labeled_column_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="labeled_column_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

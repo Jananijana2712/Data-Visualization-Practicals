@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Material Column Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Confirmed', 'Recovered', 'Deaths'],
+          ['March', 1000, 500, 10],
+          ['April', 20000, 15000, 500],
+          ['May', 30000, 25000, 700],
+          ['June', 50000, 40000, 900],
+          ['July', 70000, 55000, 1200]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'COVID-19 Cases Breakdown',
+            subtitle: 'Confirmed, Recovered, and Deaths'
+          },
+          bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          height: 500,
+          colors: ['#7E60BF', '#E4B1F0', '#CB80AB']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('material_column_chart'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+    <div id="material_column_chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
