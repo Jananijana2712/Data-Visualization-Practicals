@@ -1,0 +1,122 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Grouped Bar Chart - COVID-19 Cases vs Recovered</h1>
+    <canvas id="groupedBarChart"></canvas>
+
+    <script>
+        const covidData = [
+            { country: 'USA', confirmed: 33250000, recovered: 28000000 },
+            { country: 'India', confirmed: 31141000, recovered: 30500000 },
+            { country: 'Brazil', confirmed: 19874000, recovered: 19000000 },
+            { country: 'France', confirmed: 5893400, recovered: 5600000 },
+            { country: 'Turkey', confirmed: 5611100, recovered: 5400000 }
+        ];
+
+        const countries = covidData.map(data => data.country);
+        const confirmedCases = covidData.map(data => data.confirmed);
+        const recoveredCases = covidData.map(data => data.recovered);
+
+        const ctx = document.getElementById('groupedBarChart').getContext('2d');
+        const groupedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Recovered Cases',
+                    data: recoveredCases,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Bar Chart - IMDb Movie Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Grouped Bar Chart - IMDb Movie Scores vs User Ratings</h1>
+    <canvas id="groupedBarChart"></canvas>
+
+    <script>
+        const movieData = [
+            { title: 'The Shawshank Redemption', score: 9.3, userRating: 98 },
+            { title: 'The Godfather', score: 9.2, userRating: 97 },
+            { title: 'The Dark Knight', score: 9.0, userRating: 94 },
+            { title: '12 Angry Men', score: 9.0, userRating: 95 },
+            { title: 'Schindler\'s List', score: 8.9, userRating: 96 },
+            { title: 'Pulp Fiction', score: 8.9, userRating: 94 },
+            { title: 'The Lord of the Rings: The Return of the King', score: 9.0, userRating: 92 },
+            { title: 'Forrest Gump', score: 8.8, userRating: 89 },
+            { title: 'Fight Club', score: 8.8, userRating: 93 },
+            { title: 'Inception', score: 8.8, userRating: 91 }
+        ];
+
+        const titles = movieData.map(data => data.title);
+        const scores = movieData.map(data => data.score);
+        const userRatings = movieData.map(data => data.userRating);
+
+        const ctx = document.getElementById('groupedBarChart').getContext('2d');
+        const groupedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: titles,
+                datasets: [{
+                    label: 'IMDb Score',
+                    data: scores,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'User Rating (%)',
+                    data: userRatings,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + (this.getLabelForValue(value) <= 10 ? '' : '%'); // Append % for user ratings
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar Area Chart - COVID-19 Cases by Country</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #polarAreaChart {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Polar Area Chart - COVID-19 Cases by Country</h1>
+    <canvas id="polarAreaChart"></canvas>
+
+    <script>
+        const countries = ['USA', 'India', 'Brazil', 'France', 'Turkey'];
+        const confirmedCases = [33250000, 31141000, 19874000, 5893400, 5611100];
+
+        const ctx = document.getElementById('polarAreaChart').getContext('2d');
+        const polarAreaChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ]
+                }]
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polar Area Chart - Movie Ratings Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #polarAreaChart {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Polar Area Chart - Movie Ratings Distribution</h1>
+    <canvas id="polarAreaChart"></canvas>
+
+    <script>
+        // Sample movie ratings
+        const ratings = [5.5, 6.7, 7.2, 8.1, 7.8, 6.5, 9.0, 5.0, 6.2, 8.4, 7.0, 8.0];
+
+        // Define bins for the polar area chart
+        const bins = ['0-5', '5-6', '6-7', '7-8', '8-9', '9-10'];
+        const frequency = Array(bins.length).fill(0);
+
+        // Calculate frequency for each bin
+        ratings.forEach(rating => {
+            if (rating < 5) frequency[0]++;
+            else if (rating < 6) frequency[1]++;
+            else if (rating < 7) frequency[2]++;
+            else if (rating < 8) frequency[3]++;
+            else if (rating < 9) frequency[4]++;
+            else frequency[5]++;
+        });
+
+        const ctx = document.getElementById('polarAreaChart').getContext('2d');
+        const polarAreaChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: bins,
+                datasets: [{
+                    label: 'Frequency of Movie Ratings',
+                    data: frequency,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

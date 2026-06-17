@@ -1,0 +1,97 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Plot - COVID-19 Cases</title>
+    <script src="https://cdn.jsdelivr.net/npm/candela@1.2.1/dist/candela.js"></script>
+    <style>
+        #boxPlot {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Box Plot - COVID-19 Confirmed Cases</h1>
+    <div id="boxPlot"></div>
+
+    <script>
+        const data = [
+            { country: 'USA', min: 32000000, q1: 33000000, median: 34000000, q3: 35000000, max: 36000000 },
+            { country: 'India', min: 30000000, q1: 31000000, median: 31500000, q3: 32000000, max: 32500000 },
+            { country: 'Brazil', min: 19000000, q1: 19500000, median: 19800000, q3: 20000000, max: 20500000 },
+            { country: 'France', min: 5700000, q1: 5800000, median: 5900000, q3: 6000000, max: 6100000 },
+            { country: 'Turkey', min: 5500000, q1: 5600000, median: 5700000, q3: 5800000, max: 5900000 }
+        ];
+
+        const chart = new candela.Chart('#boxPlot', {
+            data: data,
+            mark: 'boxplot',
+            encodings: {
+                x: 'country',
+                y: { field: 'median', type: 'quantitative' },
+                y0: { field: 'min' },
+                y1: { field: 'max' },
+                q1: { field: 'q1' },
+                q3: { field: 'q3' }
+            }
+        });
+
+        chart.render();
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Plot - IMDb Movie Review Scores</title>
+    <script src="https://cdn.jsdelivr.net/npm/candela@1.2.1/dist/candela.js"></script>
+    <style>
+        #boxPlot {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Box Plot - IMDb Movie Review Scores</h1>
+    <div id="boxPlot"></div>
+
+    <script>
+        const data = [
+            { title: 'The Shawshank Redemption', min: 8.7, q1: 9.0, median: 9.3, q3: 9.5, max: 9.6 },
+            { title: 'The Godfather', min: 8.5, q1: 9.0, median: 9.2, q3: 9.4, max: 9.6 },
+            { title: 'The Dark Knight', min: 8.0, q1: 8.5, median: 9.0, q3: 9.1, max: 9.3 },
+            { title: '12 Angry Men', min: 8.2, q1: 8.7, median: 9.0, q3: 9.1, max: 9.2 },
+            { title: 'Schindler\'s List', min: 8.0, q1: 8.5, median: 8.9, q3: 9.0, max: 9.2 },
+            { title: 'Pulp Fiction', min: 8.0, q1: 8.3, median: 8.9, q3: 9.0, max: 9.1 },
+            { title: 'The Lord of the Rings: The Return of the King', min: 8.5, q1: 8.7, median: 9.0, q3: 9.1, max: 9.3 },
+            { title: 'Forrest Gump', min: 8.1, q1: 8.4, median: 8.8, q3: 8.9, max: 9.0 },
+            { title: 'Fight Club', min: 8.1, q1: 8.5, median: 8.8, q3: 9.0, max: 9.1 },
+            { title: 'Inception', min: 8.0, q1: 8.4, median: 8.8, q3: 8.9, max: 9.0 }
+        ];
+
+        const chart = new candela.Chart('#boxPlot', {
+            data: data,
+            mark: 'boxplot',
+            encodings: {
+                x: 'title',
+                y: { field: 'median', type: 'quantitative' },
+                y0: { field: 'min' },
+                y1: { field: 'max' },
+                q1: { field: 'q1' },
+                q3: { field: 'q3' }
+            }
+        });
+
+        chart.render();
+    </script>
+</body>
+</html>

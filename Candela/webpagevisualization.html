@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Data Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//unpkg.com/candela/dist/candela.min.js"></script>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #sentenTree {
+            height: 700px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Data Visualizations</h1>
+
+    <!-- Stacked Bar Chart Section -->
+    <div class="chart-container">
+        <h2>COVID-19 Stacked Bar Chart</h2>
+        <canvas id="stackedBarChart"></canvas>
+    </div>
+
+    <!-- SentenTree Section -->
+    <div class="chart-container">
+        <h2>SentenTree - Key Themes from Jon Snow's Narrative</h2>
+        <div id="sentenTree"></div>
+    </div>
+
+    <!-- Line Chart Section -->
+    <div class="chart-container">
+        <h2>Sample Line Chart</h2>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- Pie Chart Section -->
+    <div class="chart-container">
+        <h2>Sample Pie Chart</h2>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <script>
+        // Data and configuration for the stacked bar chart
+        const covidData = [
+            { country: 'USA', confirmed: 33250000, recovered: 28000000 },
+            { country: 'India', confirmed: 31141000, recovered: 30500000 },
+            { country: 'Brazil', confirmed: 19874000, recovered: 19000000 },
+            { country: 'France', confirmed: 5893400, recovered: 5600000 },
+            { country: 'Turkey', confirmed: 5611100, recovered: 5400000 }
+        ];
+
+        const countries = covidData.map(data => data.country);
+        const confirmedCases = covidData.map(data => data.confirmed);
+        const recoveredCases = covidData.map(data => data.recovered);
+
+        new Chart(document.getElementById('stackedBarChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [
+                    {
+                        label: 'Confirmed Cases',
+                        data: confirmedCases,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Recovered Cases',
+                        data: recoveredCases,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { stacked: true },
+                    y: { stacked: true }
+                }
+            }
+        });
+
+        // Data and configuration for SentenTree visualization
+        const sentenTreeData = [
+            { id: 0, count: 1000, text: 'Jon Snow must gather support from minor Northern Houses.' },
+            { id: 1, count: 950, text: 'Sansa sends Brienne to negotiate with Brynden Tully.' },
+            { id: 2, count: 800, text: 'House Manderly refuses to support the Starks.' },
+            { id: 3, count: 750, text: 'Jon and Sansa argue about attacking Winterfell.' },
+            { id: 4, count: 700, text: 'Ramsay Bolton threatens to kill Rickon Stark.' },
+            { id: 5, count: 600, text: 'Jon proposes single combat to determine the fate of the North.' },
+            { id: 6, count: 550, text: 'Sansa secretly writes a letter to Littlefinger for help.' },
+            { id: 7, count: 500, text: 'Davos realizes Melisandre sacrificed Shireen.' },
+            { id: 8, count: 450, text: 'The Stark leadership agrees to parley with the Boltons.' },
+            { id: 9, count: 400, text: 'Jon expresses the urgency to attack before Ramsay gathers more men.' },
+            { id: 10, count: 350, text: 'Jon vows to protect Sansa, but she feels no one can protect her.' },
+            { id: 11, count: 300, text: 'Ramsay breaks his surrender terms multiple times.' },
+            { id: 12, count: 250, text: 'Tormund and Davos share their experiences serving kings.' },
+            { id: 13, count: 200, text: 'The coalition force is heavily outnumbered by the Boltons.' },
+            { id: 14, count: 150, text: 'Sansa tells Ramsay he will die in battle.' },
+            { id: 15, count: 100, text: 'Jon confronts Melisandre about her intentions.' }
+        ];
+
+        const sentenTreeEl = document.getElementById('sentenTree');
+        new candela.components.SentenTree(sentenTreeEl, {
+            data: sentenTreeData,
+            graphs: 3
+        }).render();
+
+        // Data and configuration for a line chart
+        new Chart(document.getElementById('lineChart').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Sample Data',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Data and configuration for a pie chart
+        new Chart(document.getElementById('pieChart').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow'],
+                datasets: [{
+                    label: 'Sample Pie Data',
+                    data: [300, 50, 100],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+</html>

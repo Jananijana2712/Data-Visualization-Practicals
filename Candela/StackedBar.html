@@ -1,0 +1,134 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Control the width of the chart here */
+        #stackedBarChart {
+            width: 80%; /* Adjust the width percentage here */
+            max-width: 1000px; /* Optional: Set a maximum width */
+            margin: 0 auto; /* Center the chart */
+        }
+    </style>
+</head>
+<body>
+    <h1>Stacked Bar Chart - COVID-19 Cases</h1>
+    <canvas id="stackedBarChart"></canvas>
+
+    <script>
+        const covidData = [
+            { country: 'USA', confirmed: 33250000, recovered: 28000000 },
+            { country: 'India', confirmed: 31141000, recovered: 30500000 },
+            { country: 'Brazil', confirmed: 19874000, recovered: 19000000 },
+            { country: 'France', confirmed: 5893400, recovered: 5600000 },
+            { country: 'Turkey', confirmed: 5611100, recovered: 5400000 }
+        ];
+
+        const countries = covidData.map(data => data.country);
+        const confirmedCases = covidData.map(data => data.confirmed);
+        const recoveredCases = covidData.map(data => data.recovered);
+
+        const ctx = document.getElementById('stackedBarChart').getContext('2d');
+        const stackedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Recovered Cases',
+                    data: recoveredCases,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { stacked: true },
+                    y: { stacked: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart - IMDb Movie Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Control the width of the chart here */
+        #stackedBarChart {
+            width: 80%; /* Adjust the width percentage here */
+            max-width: 1000px; /* Optional: Set a maximum width */
+            margin: 0 auto; /* Center the chart */
+        }
+    </style>
+</head>
+<body>
+    <h1>Stacked Bar Chart - IMDb Movie Reviews</h1>
+    <canvas id="stackedBarChart"></canvas>
+
+    <script>
+        const movieData = [
+            { title: 'The Shawshank Redemption', reviews: 2400000, averageRating: 9.3 },
+            { title: 'The Godfather', reviews: 1800000, averageRating: 9.2 },
+            { title: 'The Dark Knight', reviews: 2500000, averageRating: 9.0 },
+            { title: '12 Angry Men', reviews: 300000, averageRating: 9.0 },
+            { title: 'Schindler\'s List', reviews: 1000000, averageRating: 8.9 },
+            { title: 'Pulp Fiction', reviews: 1600000, averageRating: 8.9 },
+            { title: 'The Lord of the Rings: The Return of the King', reviews: 1200000, averageRating: 9.0 },
+            { title: 'Forrest Gump', reviews: 1200000, averageRating: 8.8 },
+            { title: 'Fight Club', reviews: 1300000, averageRating: 8.8 },
+            { title: 'Inception', reviews: 2100000, averageRating: 8.8 }
+        ];
+
+        const titles = movieData.map(data => data.title);
+        const reviewCounts = movieData.map(data => data.reviews);
+        const averageRatings = movieData.map(data => data.averageRating * 200000); // Scale ratings for better visual representation
+
+        const ctx = document.getElementById('stackedBarChart').getContext('2d');
+        const stackedBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: titles,
+                datasets: [{
+                    label: 'Number of Reviews',
+                    data: reviewCounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Average Rating (scaled)',
+                    data: averageRatings,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: { stacked: true },
+                    y: { beginAtZero: true, stacked: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

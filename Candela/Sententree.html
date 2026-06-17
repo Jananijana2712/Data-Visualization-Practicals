@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentenTree - Jon Snow Narrative</title>
+    <script src="//unpkg.com/candela/dist/candela.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        #sentenTree {
+            width: 1200px;
+            height: 700px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>SentenTree - Key Themes from Jon Snow's Narrative</h1>
+    <div id="sentenTree"></div>
+
+    <script>
+        var el = document.getElementById('sentenTree');
+
+        var data = [
+            {id: 0, count: 1000, text: 'Jon Snow must gather support from minor Northern Houses.'},
+            {id: 1, count: 950, text: 'Sansa sends Brienne to negotiate with Brynden Tully.'},
+            {id: 2, count: 800, text: 'House Manderly refuses to support the Starks.'},
+            {id: 3, count: 750, text: 'Jon and Sansa argue about attacking Winterfell.'},
+            {id: 4, count: 700, text: 'Ramsay Bolton threatens to kill Rickon Stark.'},
+            {id: 5, count: 600, text: 'Jon proposes single combat to determine the fate of the North.'},
+            {id: 6, count: 550, text: 'Sansa secretly writes a letter to Littlefinger for help.'},
+            {id: 7, count: 500, text: 'Davos realizes Melisandre sacrificed Shireen.'},
+            {id: 8, count: 450, text: 'The Stark leadership agrees to parley with the Boltons.'},
+            {id: 9, count: 400, text: 'Jon expresses the urgency to attack before Ramsay gathers more men.'},
+            {id: 10, count: 350, text: 'Jon vows to protect Sansa, but she feels no one can protect her.'},
+            {id: 11, count: 300, text: 'Ramsay breaks his surrender terms multiple times.'},
+            {id: 12, count: 250, text: 'Tormund and Davos share their experiences serving kings.'},
+            {id: 13, count: 200, text: 'The coalition force is heavily outnumbered by the Boltons.'},
+            {id: 14, count: 150, text: 'Sansa tells Ramsay he will die in battle.'},
+            {id: 15, count: 100, text: 'Jon confronts Melisandre about her intentions.'}
+        ];
+
+        var vis = new candela.components.SentenTree(el, {
+            data: data,
+            graphs: 3
+        });
+        vis.render();
+    </script>
+</body>
+</html>

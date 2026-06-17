@@ -1,0 +1,90 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Map - COVID-19 Cases by Country</title>
+    <script src="https://cdn.jsdelivr.net/npm/candela@1.2.1/dist/candela.js"></script>
+    <style>
+        #treeMap {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tree Map - COVID-19 Cases by Country</h1>
+    <div id="treeMap"></div>
+
+    <script>
+        const data = [
+            { country: 'USA', cases: 32000000 },
+            { country: 'India', cases: 30000000 },
+            { country: 'Brazil', cases: 19000000 },
+            { country: 'France', cases: 5700000 },
+            { country: 'Turkey', cases: 5500000 }
+        ];
+
+        const chart = new candela.Chart('#treeMap', {
+            data: data,
+            mark: 'rect',
+            encodings: {
+                x: { field: 'country', type: 'ordinal' },
+                y: { field: 'cases', type: 'quantitative' }
+            }
+        });
+
+        chart.render();
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Map - IMDb Movie Reviews Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/candela@1.2.1/dist/candela.js"></script>
+    <style>
+        #treeMap {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tree Map - IMDb Movie Reviews Analysis</h1>
+    <div id="treeMap"></div>
+
+    <script>
+        const data = [
+            { genre: 'Action', reviews: 1200 },
+            { genre: 'Drama', reviews: 850 },
+            { genre: 'Comedy', reviews: 600 },
+            { genre: 'Horror', reviews: 300 },
+            { genre: 'Romance', reviews: 400 },
+            { genre: 'Sci-Fi', reviews: 700 },
+            { genre: 'Animation', reviews: 500 },
+            { genre: 'Thriller', reviews: 450 },
+            { genre: 'Documentary', reviews: 200 }
+        ];
+
+        const chart = new candela.Chart('#treeMap', {
+            data: data,
+            mark: 'rect',
+            encodings: {
+                x: { field: 'genre', type: 'ordinal' },
+                y: { field: 'reviews', type: 'quantitative' }
+            },
+            width: 800,
+            height: 400
+        });
+
+        chart.render();
+    </script>
+</body>
+</html>

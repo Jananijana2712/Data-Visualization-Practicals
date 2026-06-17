@@ -1,0 +1,125 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doughnut Chart - COVID-19 Cases by Country</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #doughnutChart {
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Doughnut Chart - COVID-19 Cases by Country</h1>
+    <canvas id="doughnutChart"></canvas>
+
+    <script>
+        const countries = ['USA', 'India', 'Brazil', 'France', 'Turkey'];
+        const confirmedCases = [33250000, 31141000, 19874000, 5893400, 5611100];
+
+        const ctx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doughnut Chart - IMDb Movie Ratings by Genre</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #doughnutChart {
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Donut Chart - IMDb Movie Ratings by Genre</h1>
+    <canvas id="doughnutChart"></canvas>
+
+    <script>
+        const genres = ['Action', 'Drama', 'Comedy', 'Thriller', 'Romance'];
+        const averageRatings = [8.5, 7.8, 6.9, 7.5, 7.2];
+
+        const ctx = document.getElementById('doughnutChart').getContext('2d');
+        const doughnutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: genres,
+                datasets: [{
+                    label: 'Average Ratings',
+                    data: averageRatings,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ' + context.raw;
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

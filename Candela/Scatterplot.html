@@ -1,0 +1,209 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot - COVID-19 Confirmed vs Recovered Cases</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #scatterPlot {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scatter Plot - COVID-19 Confirmed vs Recovered Cases</h1>
+    <canvas id="scatterPlot"></canvas>
+
+    <script>
+        const covidData = [
+            { country: 'USA', confirmed: 33250000, recovered: 28000000 },
+            { country: 'India', confirmed: 31141000, recovered: 30500000 },
+            { country: 'Brazil', confirmed: 19874000, recovered: 19000000 },
+            { country: 'France', confirmed: 5893400, recovered: 5600000 },
+            { country: 'Turkey', confirmed: 5611100, recovered: 5400000 }
+        ];
+
+        // Prepare data for the scatter plot
+        const scatterData = covidData.map(data => ({
+            x: data.confirmed,
+            y: data.recovered
+        }));
+
+        const ctx = document.getElementById('scatterPlot').getContext('2d');
+        const scatterPlot = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Confirmed vs Recovered Cases',
+                    data: scatterData,
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Confirmed Cases'
+                        },
+                        beginAtZero: true
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Recovered Cases'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot - IMDb Movie Ratings vs Number of Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #scatterPlot {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scatter Plot - IMDb Movie Ratings vs Number of Reviews</h1>
+    <canvas id="scatterPlot"></canvas>
+
+    <script>
+        const movieData = [
+            { title: 'Movie A', rating: 8.5, reviews: 5000 },
+            { title: 'Movie B', rating: 7.2, reviews: 3000 },
+            { title: 'Movie C', rating: 9.0, reviews: 7000 },
+            { title: 'Movie D', rating: 6.5, reviews: 1500 },
+            { title: 'Movie E', rating: 8.0, reviews: 4000 }
+        ];
+
+        // Prepare data for the scatter plot
+        const scatterData = movieData.map(data => ({
+            x: data.rating,
+            y: data.reviews
+        }));
+
+        const ctx = document.getElementById('scatterPlot').getContext('2d');
+        const scatterPlot = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Ratings vs Number of Reviews',
+                    data: scatterData,
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'IMDb Ratings'
+                        },
+                        beginAtZero: true,
+                        min: 0,
+                        max: 10
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Reviews'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot - IMDb Movie Ratings vs Number of Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #scatterPlot {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scatter Plot - IMDb Movie Ratings vs Number of Reviews</h1>
+    <canvas id="scatterPlot"></canvas>
+
+    <script>
+        const movieData = [
+            { title: 'Movie A', rating: 8.5, reviews: 5000 },
+            { title: 'Movie B', rating: 7.2, reviews: 3000 },
+            { title: 'Movie C', rating: 9.0, reviews: 7000 },
+            { title: 'Movie D', rating: 6.5, reviews: 1500 },
+            { title: 'Movie E', rating: 8.0, reviews: 4000 }
+        ];
+
+        // Prepare data for the scatter plot
+        const scatterData = movieData.map(data => ({
+            x: data.rating,
+            y: data.reviews
+        }));
+
+        const ctx = document.getElementById('scatterPlot').getContext('2d');
+        const scatterPlot = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Ratings vs Number of Reviews',
+                    data: scatterData,
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'IMDb Ratings'
+                        },
+                        beginAtZero: true,
+                        min: 0,
+                        max: 10
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Reviews'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

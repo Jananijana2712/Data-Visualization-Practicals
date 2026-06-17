@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candela COVID-19 Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General page styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9dede;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            margin: 20px 0;
+            color: #333;
+        }
+
+        /* Card container styling */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .card {
+            width: 300px;
+            background-color: #fcf6f6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #555;
+        }
+        .chart-container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Candela COVID-19 Data Visualization</h1>
+
+    <div class="container">
+        <!-- Bar Chart Card -->
+        <div class="card">
+            <h2>Bar Chart</h2>
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Line Chart Card -->
+        <div class="card">
+            <h2>Line Chart</h2>
+            <div class="chart-container">
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Pie Chart Card -->
+        <div class="card">
+            <h2>Pie Chart</h2>
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Doughnut Chart Card -->
+        <div class="card">
+            <h2>Doughnut Chart</h2>
+            <div class="chart-container">
+                <canvas id="doughnutChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Polar Area Chart Card -->
+        <div class="card">
+            <h2>Polar Area Chart</h2>
+            <div class="chart-container">
+                <canvas id="polarAreaChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample COVID-19 data
+        const countries = ['USA', 'India', 'Brazil', 'France', 'Turkey'];
+        const confirmedCases = [33250000, 31141000, 19874000, 5893400, 5611100];
+
+        // Bar Chart
+        new Chart(document.getElementById('barChart'), {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Line Chart
+        new Chart(document.getElementById('lineChart'), {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [{
+                    label: 'Confirmed Cases Over Time',
+                    data: [5000000, 10000000, 15000000, 20000000, 25000000],
+                    fill: false,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Pie Chart
+        new Chart(document.getElementById('pieChart'), {
+            type: 'pie',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Doughnut Chart
+        new Chart(document.getElementById('doughnutChart'), {
+            type: 'doughnut',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ]
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // Polar Area Chart
+        new Chart(document.getElementById('polarAreaChart'), {
+            type: 'polarArea',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ]
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+    </script>
+</body>
+</html>

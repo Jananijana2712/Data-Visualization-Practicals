@@ -1,0 +1,113 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogram - COVID-19 Cases Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #histogram {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Histogram - COVID-19 Cases Distribution</h1>
+    <canvas id="histogram"></canvas>
+
+    <script>
+        const confirmedCases = [33250000, 31141000, 19874000, 5893400, 5611100];
+
+        const ctx = document.getElementById('histogram').getContext('2d');
+        const histogram = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-5M', '5M-10M', '10M-15M', '15M-20M', '20M-25M', '25M-30M', '30M-35M'],
+                datasets: [{
+                    label: 'Frequency',
+                    data: [1, 0, 2, 0, 0, 0, 0], // Example data distribution
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogram - Movie Ratings Distribution</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #histogram {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Histogram - Movie Ratings Distribution</h1>
+    <canvas id="histogram"></canvas>
+
+    <script>
+        const movieRatings = [5.5, 6.7, 7.2, 8.1, 7.8, 6.5, 9.0, 5.0, 6.2, 8.4, 7.0, 8.0];
+
+        // Creating bins for the histogram
+        const bins = [0, 5, 6, 7, 8, 9, 10];
+        const frequency = Array(bins.length - 1).fill(0);
+
+        movieRatings.forEach(rating => {
+            for (let i = 0; i < bins.length - 1; i++) {
+                if (rating >= bins[i] && rating < bins[i + 1]) {
+                    frequency[i]++;
+                    break;
+                }
+            }
+        });
+
+        const ctx = document.getElementById('histogram').getContext('2d');
+        const histogram = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['0-5', '5-6', '6-7', '7-8', '8-9', '9-10'],
+                datasets: [{
+                    label: 'Frequency',
+                    data: frequency,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

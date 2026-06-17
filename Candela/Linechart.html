@@ -1,0 +1,112 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart - COVID-19 Cases Over Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #lineChart {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Line Chart - COVID-19 Cases Over Time</h1>
+    <canvas id="lineChart"></canvas>
+
+    <script>
+        const labels = ['January', 'February', 'March', 'April', 'May'];
+        const confirmedCases = [5000000, 10000000, 15000000, 20000000, 25000000];
+
+        const ctx = document.getElementById('lineChart').getContext('2d');
+        const lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart - IMDb Movie Reviews Over Time</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #lineChart {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Line Chart - IMDb Movie Reviews Over Time</h1>
+    <canvas id="lineChart"></canvas>
+
+    <script>
+        const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        const movieReviews = {
+            'The Shawshank Redemption': [200000, 250000, 300000, 350000, 400000, 450000, 500000],
+            'The Godfather': [150000, 180000, 210000, 240000, 270000, 300000, 350000],
+            'The Dark Knight': [100000, 150000, 250000, 300000, 400000, 500000, 600000],
+        };
+
+        const ctx = document.getElementById('lineChart').getContext('2d');
+
+        const datasets = Object.keys(movieReviews).map(movie => ({
+            label: movie,
+            data: movieReviews[movie],
+            fill: false,
+            borderColor: getRandomColor(),
+            tension: 0.1
+        }));
+
+        const lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>

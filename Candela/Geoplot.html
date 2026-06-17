@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Plot - COVID-19 Cases by Country</title>
+    <script src="https://cdn.jsdelivr.net/npm/candela@1.2.1/dist/candela.js"></script>
+    <style>
+        #geoPlot {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Geo Plot - COVID-19 Cases by Country</h1>
+    <div id="geoPlot"></div>
+
+    <script>
+        const data = [
+            { country: 'USA', cases: 32000000, longitude: -98.583333, latitude: 39.833333 },
+            { country: 'India', cases: 30000000, longitude: 78.962880, latitude: 20.593684 },
+            { country: 'Brazil', cases: 19000000, longitude: -51.925280, latitude: -14.235004 },
+            { country: 'France', cases: 5700000, longitude: 2.213749, latitude: 46.603354 },
+            { country: 'Turkey', cases: 5500000, longitude: 35.243322, latitude: 38.963745 }
+        ];
+
+        const chart = new candela.Chart('#geoPlot', {
+            data: data,
+            mark: 'point',
+            encodings: {
+                longitude: { field: 'longitude', type: 'quantitative' },
+                latitude: { field: 'latitude', type: 'quantitative' },
+                size: { field: 'cases', type: 'quantitative' }
+            }
+        });
+
+        chart.render();
+    </script>
+</body>
+</html>

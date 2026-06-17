@@ -1,0 +1,119 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Chart - COVID-19 Cases and Recoveries</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #radarChart {
+            width: 80%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Radar Chart - COVID-19 Cases and Recoveries</h1>
+    <canvas id="radarChart"></canvas>
+
+    <script>
+        const countries = ['USA', 'India', 'Brazil', 'France', 'Turkey'];
+        const confirmedCases = [33250000, 31141000, 19874000, 5893400, 5611100];
+        const recoveredCases = [28000000, 30500000, 19000000, 5600000, 5400000];
+
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        const radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: countries,
+                datasets: [
+                    {
+                        label: 'Confirmed Cases',
+                        data: confirmedCases,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)'
+                    },
+                    {
+                        label: 'Recovered Cases',
+                        data: recoveredCases,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radar Chart - Movie Ratings by Genre</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #radarChart {
+            width: 80%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Radar Chart - Movie Ratings by Genre</h1>
+    <canvas id="radarChart"></canvas>
+
+    <script>
+        // Example movie ratings by genre
+        const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi'];
+        const ratings = [8.5, 7.2, 9.0, 6.5, 8.0]; // Average ratings for each genre
+        const numRatings = [500, 300, 700, 150, 400]; // Number of ratings for each genre
+
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        const radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: genres,
+                datasets: [
+                    {
+                        label: 'Average Ratings',
+                        data: ratings,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Number of Ratings',
+                        data: numRatings.map(n => n / 100), // Normalize for better visibility
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 10 // Adjust according to your data range
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colored Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Control the width of the chart here */
+        #coloredBarChart {
+            width: 80%; /* Adjust the width percentage here */
+            max-width: 900px; /* Optional: Set a maximum width */
+            margin: 0 auto; /* Center the chart */
+        }
+    </style>
+</head>
+<body>
+    <h1>Colored Bar Chart - COVID-19 Cases</h1>
+    <canvas id="coloredBarChart"></canvas>
+
+    <script>
+        const covidData = [
+            { country: 'USA', confirmed: 33250000 },
+            { country: 'India', confirmed: 31141000 },
+            { country: 'Brazil', confirmed: 19874000 },
+            { country: 'France', confirmed: 5893400 },
+            { country: 'Turkey', confirmed: 5611100 }
+        ];
+
+        const countries = covidData.map(data => data.country);
+        const confirmedCases = covidData.map(data => data.confirmed);
+
+        const ctx = document.getElementById('coloredBarChart').getContext('2d');
+        const coloredBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colored Bar Chart - IMDb Movie Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Control the width of the chart here */
+        #coloredBarChart {
+            width: 80%; /* Adjust the width percentage here */
+            max-width: 900px; /* Optional: Set a maximum width */
+            margin: 0 auto; /* Center the chart */
+        }
+    </style>
+</head>
+<body>
+    <h1>Colored Bar Chart - IMDb Movie Reviews</h1>
+    <canvas id="coloredBarChart"></canvas>
+
+    <script>
+        // Example IMDb movie reviews dataset (movie title, review score)
+        const movieData = [
+            { title: 'The Shawshank Redemption', score: 9.3 },
+            { title: 'The Godfather', score: 9.2 },
+            { title: 'The Dark Knight', score: 9.0 },
+            { title: '12 Angry Men', score: 9.0 },
+            { title: 'Schindler\'s List', score: 8.9 }
+        ];
+
+        // Extracting movie titles and review scores
+        const movieTitles = movieData.map(data => data.title);
+        const reviewScores = movieData.map(data => data.score);
+
+        // Creating the colored bar chart
+        const ctx = document.getElementById('coloredBarChart').getContext('2d');
+        const coloredBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: movieTitles,
+                datasets: [{
+                    label: 'Review Score',
+                    data: reviewScores,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10 // IMDb scores are between 0 and 10
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

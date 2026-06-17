@@ -1,0 +1,196 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #myChart {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>COVID-19 Cases by Country</h1>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Example COVID-19 dataset (country, confirmed cases)
+        const covidData = [
+            { country: 'USA', confirmed: 33250000 },
+            { country: 'India', confirmed: 31141000 },
+            { country: 'Brazil', confirmed: 19874000 },
+            { country: 'France', confirmed: 5893400 },
+            { country: 'Turkey', confirmed: 5611100 }
+        ];
+
+        // Extracting countries and confirmed cases
+        const countries = covidData.map(data => data.country);
+        const confirmedCases = covidData.map(data => data.confirmed);
+
+        // Creating the bar chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: countries,
+                datasets: [{
+                    label: 'Confirmed Cases',
+                    data: confirmedCases,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMDb Movie Reviews</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #myChart {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>IMDb Movie Review Scores</h1>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Example IMDb movie reviews dataset (movie title, review score)
+        const movieData = [
+            { title: 'The Shawshank Redemption', score: 9.3 },
+            { title: 'The Godfather', score: 9.2 },
+            { title: 'The Dark Knight', score: 8.6 },
+            { title: '12 Angry Men', score: 8.0 },
+            { title: 'Schindler\'s List', score: 8.9 }
+        ];
+
+        // Extracting movie titles and review scores
+        const movieTitles = movieData.map(data => data.title);
+        const reviewScores = movieData.map(data => data.score);
+
+        // Creating the bar chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: movieTitles,
+                datasets: [{
+                    label: 'Review Score',
+                    data: reviewScores,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10 // IMDb scores are generally between 0 and 10
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Quality Dataset Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #myChart {
+            width: 80%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Average Alcohol Content in Red and White Wines</h1>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // Example Wine Quality dataset (wine type, average alcohol content)
+        const wineData = [
+            { wineType: 'Red Wine', averageAlcohol: 10.2 },
+            { wineType: 'White Wine', averageAlcohol: 9.8 }
+        ];
+
+        // Extracting wine types and average alcohol content
+        const wineTypes = wineData.map(data => data.wineType);
+        const averageAlcohol = wineData.map(data => data.averageAlcohol);
+
+        // Creating the bar chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: wineTypes,
+                datasets: [{
+                    label: 'Average Alcohol Content (%)',
+                    data: averageAlcohol,
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Alcohol Content (%)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Wine Type'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
