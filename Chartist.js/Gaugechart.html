@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Gauge Chart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 300px; /* Adjust width as needed */
+      height: 300px; /* Adjust height as needed */
+    }
+    .ct-series-a .ct-slice { stroke: #FF5733; } /* Total Cases (Red) */
+    .ct-series-b .ct-slice { stroke: #33FF57; } /* Active Cases (Green) */
+    .ct-series-c .ct-slice { stroke: #3357FF; } /* Recovered (Blue) */
+    .ct-series-d .ct-slice { stroke: #FFCC00; } /* Deaths (Yellow) */
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Gauge Chart</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Required libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+  <script>
+    // COVID-19 dataset for gauge chart
+    var data = {
+      series: [300000, 700000, 400000] // Example data for Recovered, Active, Deaths
+    };
+
+    // Draw the gauge chart (donut style) simulating a gauge
+    new Chartist.Pie('.ct-chart', data, {
+      donut: true,
+      donutWidth: 30, // Width of the donut
+      startAngle: 270, // Start angle of the donut
+      total: 2000000, // Total value for gauge calculation
+      showLabel: true // Show labels
+    });
+  </script>
+
+</body>
+</html>

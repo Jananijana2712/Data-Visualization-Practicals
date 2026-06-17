@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Bi-Polar Area Line Chart with Chartist.js</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+    /* Custom color for the area under the positive line */
+    .ct-series-a .ct-area {
+      fill: rgba(248, 122, 83, 0.6); /* Darker version of #F87A53 for area */
+    }
+    /* Custom color for the area under the negative line */
+    .ct-series-b .ct-area {
+      fill: rgba(66, 133, 244, 0.6); /* Darker blue for negative values */
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Bi-Polar Area Line Chart</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Chartist.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <script>
+    new Chartist.Line('.ct-chart', {
+      labels: [1, 2, 3, 4, 5, 6, 7, 8], // Days
+      series: [
+        [10, 15, 20, 15, 10, 20, 30, 40],  // COVID-19 confirmed cases (positive values)
+        [-5, -3, -4, -2, -3, -1, -2, -1],   // Negative values (e.g., recoveries or hospitalizations)
+        [0, 0, 0, 5, 10, 12, 15, 8],        // Neutral/steady cases
+        [2, 3, 2, 1, 0, -1, -2, -2]          // Another negative trend (e.g., decreased admissions)
+      ]
+    }, {
+      high: 50,
+      low: -5,
+      showArea: true,
+      showLine: false,
+      showPoint: false,
+      fullWidth: true,
+      axisX: {
+        showLabel: true,  // Show X-axis labels
+        showGrid: true
+      }
+    });
+  </script>
+
+</body>
+</html>

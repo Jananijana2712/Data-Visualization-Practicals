@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Pie Chart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+    <style>
+        .ct-chart {
+            width: 300px; /* Adjust width as needed */
+            height: 300px; /* Adjust height as needed */
+        }
+        /* Custom colors for each slice */
+        .ct-series-a .ct-slice { stroke: #FF5733; } /* Confirmed cases (Red) */
+        .ct-series-b .ct-slice { stroke: #33FF57; } /* Recovered cases (Green) */
+        .ct-series-c .ct-slice { stroke: #3357FF; } /* Active cases (Blue) */
+        .ct-series-d .ct-slice { stroke: #FFCC00; } /* Deaths (Yellow) */
+    </style>
+</head>
+<body>
+
+    <h1>COVID-19 Pie Chart</h1>
+    <div class="ct-chart"></div>
+
+    <!-- Required libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+    <script>
+        // COVID-19 dataset for pie chart
+        var data = {
+            series: [500000, 300000, 150000, 50000], // Example data: Confirmed, Recovered, Active, Deaths
+            labels: ['Confirmed Cases', 'Recovered Cases', 'Active Cases', 'Deaths']
+        };
+
+        var chart = new Chartist.Pie('.ct-chart', data, {
+            donut: true,
+            showLabel: true // Show labels for slices
+        });
+
+        chart.on('draw', function(data) {
+            if(data.type === 'slice') {
+                // Get the total path length in order to use for dash array animation
+                var pathLength = data.element._node.getTotalLength();
+
+                // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+                data.element.attr({
+                    'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+                });
+
+                // Create animation definition while also assigning an ID to the animation for later sync usage
+                var animationDefinition = {
+                    'stroke-dashoffset': {
+                        id: 'anim' + data.index,
+                        dur: 1000,
+                        from: -pathLength + 'px',
+                        to:  '0px',
+                        easing: Chartist.Svg.Easing.easeOutQuint,
+                        // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                        fill: 'freeze'
+                    }
+                };
+
+                // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+                if(data.index !== 0) {
+                    animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+                }
+
+                // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+                data.element.attr({
+                    'stroke-dashoffset': -pathLength + 'px'
+                });
+
+                // We can't use guided mode as the animations need to rely on setting begin manually
+                // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+                data.element.animate(animationDefinition, false);
+            }
+        });
+
+        // For the sake of the example we update the chart every time it's created with a delay of 10 seconds
+        chart.on('created', function() {
+            if(window.__anim21278907124) {
+                clearTimeout(window.__anim21278907124);
+                window.__anim21278907124 = null;
+            }
+            window.__anim21278907124 = setTimeout(chart.update.bind(chart), 10000);
+        });
+    </script>
+
+</body>
+</html>

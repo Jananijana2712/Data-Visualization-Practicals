@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Gauge Chart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+    <style>
+        .ct-chart {
+            width: 300px; /* Adjust width as needed */
+            height: 300px; /* Adjust height as needed */
+        }
+        /* Custom colors for each gauge segment */
+        .ct-series-a .ct-slice-donut-solid { fill: #FF8A8A; } /* Confirmed Cases */
+        .ct-series-b .ct-slice-donut-solid { fill: #88FF8A; } /* Recovered Cases */
+        .ct-series-c .ct-slice-donut-solid { fill: #8A8AFF; } /* Deaths */
+    </style>
+</head>
+<body>
+
+    <h1>COVID-19 Gauge Chart</h1>
+    <div class="ct-chart"></div>
+
+    <!-- Required libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+    <script>
+        // COVID-19 dataset for gauge chart
+        var data = {
+            series: [50, 30, 20], // Confirmed, Recovered, Deaths
+            labels: ['Confirmed', 'Recovered', 'Deaths']
+        };
+
+        // Gauge chart configuration
+        new Chartist.Pie('.ct-chart', data, {
+            donut: true,
+            donutWidth: 60,
+            donutSolid: true,
+            startAngle: 180,  // Starting from the middle to create a half-donut
+            total: 200,       // Adjust total value to control the gauge arc extent
+            showLabel: true,
+            labelInterpolationFnc: function(value, index) {
+                return data.labels[index] + ' (' + Math.round(value / data.series.reduce((a, b) => a + b) * 100) + '%)';
+            }
+        });
+    </script>
+
+</body>
+</html>

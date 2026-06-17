@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Bi-polar Bar Chart with Peak Circles</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Weekly Change in Cases</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Required libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+  <script>
+    // Sample COVID-19 data showing weekly increase/decrease in cases
+    var chart = new Chartist.Bar('.ct-chart', {
+      labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+      series: [
+        [3, -5, 6, -4, 2, -6, 5, -2, -3, 4]
+      ]
+    }, {
+      high: 10,
+      low: -10,
+      axisX: {
+        labelInterpolationFnc: function(value, index) {
+          return index % 2 === 0 ? value : null;
+        }
+      }
+    });
+
+    // Add peak circles with specific color during the draw event
+    chart.on('draw', function(data) {
+      if (data.type === 'bar') {
+        data.group.append(new Chartist.Svg('circle', {
+          cx: data.x2,
+          cy: data.y2,
+          r: Math.abs(Chartist.getMultiValue(data.value)) * 2 + 5,  // Radius based on value
+          fill: '#F0C1E1'  // Directly set the color for the peak circles
+        }));
+      }
+    });
+  </script>
+
+</body>
+</html>

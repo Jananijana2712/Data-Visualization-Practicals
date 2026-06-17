@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Line Chart with Triangles</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Using events to replace graphics</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Chartist.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <script>
+    // Sample COVID-19 data: confirmed cases over 5 days
+    var chart = new Chartist.Line('.ct-chart', {
+      labels: [1, 2, 3, 4, 5], // Days
+      series: [
+        [20, 25, 30, 22, 18] // Example: confirmed COVID-19 cases
+      ]
+    });
+
+    // Listening for draw events that get emitted by the Chartist chart
+    chart.on('draw', function(data) {
+      // If the draw event was triggered from drawing a point on the line chart
+      if(data.type === 'point') {
+        // Creating a new path SVG element that draws a triangle around the point coordinates
+        var triangle = new Chartist.Svg('path', {
+          d: ['M',
+            data.x,
+            data.y - 15,
+            'L',
+            data.x - 15,
+            data.y + 8,
+            'L',
+            data.x + 15,
+            data.y + 8,
+            'z'].join(' '),
+          style: 'fill: #3AA6B9; fill-opacity: 1' // Triangle color set to #3AA6B9
+        }, 'ct-area');
+
+        // Replace the original point drawn by Chartist with the newly created triangle
+        data.element.replace(triangle);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Time Series Chart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+    /* Custom colors for each series */
+    .ct-series-a .ct-line, .ct-series-a .ct-point {
+      stroke: #257180;
+    }
+    .ct-series-b .ct-line, .ct-series-b .ct-point {
+      stroke: #6CBEC7;
+    }
+    /* Custom legend styling */
+    .legend {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .legend div {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+    }
+    .legend div span {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+    }
+    .legend .cases { background-color: #257180; }
+    .legend .recoveries { background-color: #6CBEC7; }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Time Series Chart</h1>
+  <div class="ct-chart"></div>
+  <div class="legend">
+    <div><span class="cases"></span>Daily Cases</div>
+    <div><span class="recoveries"></span>Recoveries</div>
+  </div>
+
+  <!-- Required libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+  <script>
+    var chart = new Chartist.Line('.ct-chart', {
+      series: [
+        {
+          name: 'cases',
+          data: [
+            {x: new Date(2024, 0, 1), y: 250},
+            {x: new Date(2024, 0, 5), y: 220},
+            {x: new Date(2024, 0, 10), y: 300},
+            {x: new Date(2024, 0, 15), y: 280},
+            {x: new Date(2024, 0, 20), y: 270},
+            {x: new Date(2024, 0, 25), y: 310},
+            {x: new Date(2024, 0, 30), y: 290}
+          ]
+        },
+        {
+          name: 'recoveries',
+          data: [
+            {x: new Date(2024, 0, 1), y: 150},
+            {x: new Date(2024, 0, 5), y: 180},
+            {x: new Date(2024, 0, 10), y: 200},
+            {x: new Date(2024, 0, 15), y: 250},
+            {x: new Date(2024, 0, 20), y: 230},
+            {x: new Date(2024, 0, 25), y: 210},
+            {x: new Date(2024, 0, 30), y: 240}
+          ]
+        }
+      ]
+    }, {
+      axisX: {
+        type: Chartist.FixedScaleAxis,
+        divisor: 6,
+        labelInterpolationFnc: function(value) {
+          return moment(value).format('MMM D');
+        }
+      },
+      fullWidth: true,
+      chartPadding: {
+        right: 20
+      }
+    });
+  </script>
+
+</body>
+</html>

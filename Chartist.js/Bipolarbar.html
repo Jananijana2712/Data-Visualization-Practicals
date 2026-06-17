@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Bi-polar Bar Chart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+    /* Custom color for the bars */
+    .ct-series-a .ct-bar {
+      stroke: #295F98;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Bi-polar Bar Chart</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Required libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+
+  <script>
+    var data = {
+      labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
+      series: [
+        [5, 3, 7, 4, 6, -2, -1, -5, -3, -4]  // Example: New Cases, with negative values for recoveries
+      ]
+    };
+
+    var options = {
+      high: 10,
+      low: -10,
+      axisX: {
+        labelInterpolationFnc: function(value, index) {
+          return index % 2 === 0 ? value : null; // Show labels for every second item
+        }
+      }
+    };
+
+    new Chartist.Bar('.ct-chart', data, options);
+  </script>
+
+</body>
+</html>

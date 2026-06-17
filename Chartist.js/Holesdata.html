@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Data Visualization with Chartist.js</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+    /* Custom colors for the series lines */
+    .ct-series-a .ct-line {
+      stroke: #789DBC; /* Color for Confirmed Cases */
+      stroke-width: 2px;
+    }
+    .ct-series-b .ct-line {
+      stroke: #CDC1FF; /* Color for Deaths */
+      stroke-width: 2px;
+    }
+    .ct-series-c .ct-line {
+      stroke: #F67280; /* Color for Recoveries */
+      stroke-width: 2px;
+    }
+    .ct-series-d .ct-line {
+      stroke: #6A0572; /* Color for Active Cases */
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Data Visualization</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Chartist.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <script>
+    var chart = new Chartist.Line('.ct-chart', {
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], // Replace with actual dates or days
+      series: [
+        [100, 120, 150, 180, 200, 210, 220, null, null, null, 250, 260, 270, 280, 290, 300], // Confirmed Cases
+        [5, 10, null, 12, null, 15, 20, 25, null, null, 30, null, 35, null, null, null],      // Deaths
+        [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, null, null, null],       // Recoveries
+        [{x: 1, y: 40}, {x: 2, y: 60}, {x: 3, y: undefined}, {x: 4, y: 90}, {x: 5, y: null}, {x: 6, y: 100}, {x: 7, y: 110}] // Active Cases
+      ]
+    }, {
+      fullWidth: true,
+      chartPadding: {
+        right: 10
+      },
+      low: 0
+    });
+  </script>
+
+</body>
+</html>

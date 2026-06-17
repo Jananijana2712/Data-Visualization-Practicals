@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Line Scatter Diagram with Chartist.js</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.css">
+  <style>
+    .ct-chart {
+      width: 100%;
+      height: 400px;
+    }
+    /* Custom retro colors for each series */
+    .ct-series-a .ct-point {
+      stroke: #FF6F61; /* Confirmed cases */
+      stroke-width: 8px;
+    }
+    .ct-series-b .ct-point {
+      stroke: #6B5B95; /* Deaths */
+      stroke-width: 8px;
+    }
+    .ct-series-c .ct-point {
+      stroke: #88B04B; /* Recoveries */
+      stroke-width: 8px;
+    }
+    .ct-series-d .ct-point {
+      stroke: #F7CAC9; /* Active cases */
+      stroke-width: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>COVID-19 Line Scatter Diagram</h1>
+  <div class="ct-chart"></div>
+
+  <!-- Chartist.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.4/dist/chartist.min.js"></script>
+  <script>
+    var times = function(n) {
+      return Array.apply(null, new Array(n));
+    };
+
+    var covidData = {
+      labels: times(52).map((_, i) => i + 1), // Represents weeks in a year
+      series: [
+        [500, 550, 600, 700, 680, 590, 495, 300, 220, 220, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540], // Confirmed cases
+        [5, 6, 7, 8, 10, 12, 13, 14, 16, 18, 20, 22, 204, 250, 270, 300, 330, 350, 380, 400, 420, 44, 46, 50, 52, 55, 57, 60, 63, 65, 67, 70, 72, 75, 78, 80, 82, 85, 87, 90, 92, 94, 96, 100, 103, 105, 107, 110, 113, 115, 118, 120], // Deaths
+        [40, 45, 48, 52, 55, 58, 62, 66, 69, 72, 75, 78, 82, 86, 89, 92, 95, 98, 100, 103, 106, 109, 113, 116, 119, 122, 126, 129, 132, 135, 138, 140, 144, 147, 150, 153, 155, 158, 161, 164, 167, 170, 172, 175, 178, 180, 183, 186, 189, 192, 195, 198], // Recoveries
+        [5, 4, 6, 8, 9, 12, 10, 9, 14, 15, 18, 20, 23, 22, 25, 26, 28, 29, 31, 33, 35, 36, 38, 40, 42, 43, 45, 46, 48, 50, 51, 52, 54, 56, 58, 60, 62, 63, 65, 66, 68, 69, 71, 72, 74, 75, 77, 79, 80, 82, 84, 85] // Active cases
+      ]
+    };
+
+    var options = {
+      showLine: false,
+      axisX: {
+        labelInterpolationFnc: function(value, index) {
+          return index % 13 === 0 ? 'W' + value : null; // Display every 13th week label
+        }
+      }
+    };
+
+    var responsiveOptions = [
+      ['screen and (min-width: 640px)', {
+        axisX: {
+          labelInterpolationFnc: function(value, index) {
+            return index % 4 === 0 ? 'W' + value : null; // Display every 4th week label for larger screens
+          }
+        }
+      }]
+    ];
+
+    new Chartist.Line('.ct-chart', covidData, options, responsiveOptions);
+  </script>
+
+</body>
+</html>
